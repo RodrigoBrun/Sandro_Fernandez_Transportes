@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- =========================================================
+       Sandro Fernández Transportes — index.html
+       Basado en la landing premium genérica (template 2)
+       Contenido real portado desde la versión 1.
+  ========================================================== -->
+
+  <title>Sandro Fernández Transportes — Transporte forestal en Uruguay</title>
+
+  <!-- 🖋️ Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- ✨ AOS + Phosphor -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- 💅 Estilos del template 2 (ajustaremos colores en styles.css) -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <meta name="description" content="Transporte forestal seguro y puntual en todo Uruguay. Coordinación 24/7, taller 06–22 hs, certificación ISO 39001.">
+</head>
+<body>
+  <!-- ================================
+       Header
+  ================================= -->
+  <header class="header" id="top">
+    <div class="container header-row">
+      <a class="brand" href="#top">
+        <!-- Tu logo sin fondo -->
+        <img src="imagenes/Logo_Sandro_Fernandez.jpeg" alt="Sandro Fernández Transportes" style="height:32px; width:auto; object-fit:contain;">
+        <span>Sandro Fernández <b>Transportes</b></span>
+      </a>
+
+      <!-- 🔗 Mantengo IDs del template 2 para no romper JS,
+           pero renombro los textos a nuestra estructura -->
+      <nav class="nav">
+        <a class="nav-link" href="#servicios">Servicios</a>
+        <a class="nav-link" href="#portfolio">Flota</a>
+        <a class="nav-link" href="#proceso">Cobertura</a>
+        <a class="nav-link" href="#precios">Diferenciales</a>
+        <a class="nav-link" href="#certificaciones">Certificaciones</a>
+        <a class="nav-link" href="#faq">FAQ</a>
+        <a class="btn btn-cta nav-cta" href="#contacto">
+          <i class="ph ph-paper-plane-tilt"></i> Contacto
+        </a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="btn-theme" class="icon-btn" aria-label="Modo oscuro"><i class="ph ph-moon-stars"></i></button>
+        <button id="btn-menu" class="icon-btn hide-desktop" aria-label="Abrir menú"><i class="ph ph-list"></i></button>
+      </div>
+    </div>
+
+    <!-- Menú mobile -->
+    <div id="mobile-menu" class="mobile-menu">
+      <a class="mobile-link" href="#servicios">Servicios</a>
+      <a class="mobile-link" href="#portfolio">Flota</a>
+      <a class="mobile-link" href="#proceso">Cobertura</a>
+      <a class="mobile-link" href="#precios">Diferenciales</a>
+      <a class="mobile-link" href="#certificaciones">Certificaciones</a>
+      <a class="mobile-link" href="#faq">FAQ</a>
+      <a class="btn btn-cta" href="#contacto"><i class="ph ph-paper-plane-tilt"></i> Contacto</a>
+    </div>
+  </header>
+
+  <!-- ================================
+       Hero
+  ================================= -->
+  <section class="hero" aria-labelledby="hero-title">
+    <!-- Formas decorativas del template (dejar) -->
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+
+    <div class="container hero-grid">
+      <div class="hero-copy" data-aos="fade-up">
+        <span class="badge"><i class="ph ph-road-horizon"></i> Transporte forestal</span>
+        <h1 id="hero-title">
+          Transporte <span class="grad">seguro y puntual</span> en todo Uruguay.
+        </h1>
+        <p class="lead">
+          +20 años de experiencia, <b>coordinación 24/7</b>, taller <b>06–22 hs</b> y <b>ISO 39001</b> en seguridad vial.
+        </p>
+        <div class="hero-cta">
+          <!-- Si querés quitar WhatsApp global, dejá solo el botón secundario -->
+          <a class="btn btn-cta" href="#servicios"><i class="ph ph-truck"></i> Ver servicios</a>
+          <a class="btn btn-ghost" href="#portfolio"><i class="ph ph-camera"></i> Ver flota</a>
+        </div>
+
+        <!-- Métricas rápidas -->
+        <div class="metrics" data-aos="fade-up" data-aos-delay="150">
+          <div class="metric">
+            <span class="num" data-count="20">0</span>
+            <span class="label">Años de experiencia</span>
+          </div>
+          <div class="metric">
+            <span class="num" data-count="24">0</span>
+            <span class="label">Coordinación 24/7</span>
+          </div>
+          <div class="metric">
+            <span class="num" data-count="39001">0</span>
+            <span class="label">Norma ISO</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Media a la derecha: dejamos la “preview-card” del template
+           o podés cambiarla por una foto hero.jpg desde CSS de la sección -->
+      <div class="hero-media" data-aos="zoom-in">
+        <div class="preview-card">
+          <div class="preview-top"><span></span><span></span><span></span></div>
+          <div class="preview-body">
+            <div class="preview-hero">
+              <div class="chip"><i class="ph ph-seal-check"></i> ISO 39001</div>
+              <div class="chip"><i class="ph ph-wrench"></i> Taller 06–22</div>
+              <div class="chip"><i class="ph ph-headset"></i> 24/7</div>
+            </div>
+            <div class="preview-grid">
+              <div class="preview-item"></div>
+              <div class="preview-item tall"></div>
+              <div class="preview-item"></div>
+              <div class="preview-item"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================
+       Servicios
+  ================================= -->
+  <section id="servicios" class="section">
+    <div class="container">
+      <header class="section-head" data-aos="fade-up">
+        <span class="eyebrow">Qué hacemos</span>
+        <h2>Servicios</h2>
+        <p class="section-lead">Operativa forestal con foco en seguridad y puntualidad.</p>
+      </header>
+
+      <div class="cards">
+        <article class="card" data-aos="fade-up">
+          <i class="ph ph-truck"></i>
+          <h3>Transporte forestal integral</h3>
+          <p>Traslado de madera en equipos pesados por vía terrestre con procesos estandarizados.</p>
+        </article>
+        <article class="card" data-aos="fade-up" data-aos-delay="80">
+          <i class="ph ph-arrows-down-up"></i>
+          <h3>Carga y descarga</h3>
+          <p>Operativa segura y eficiente en origen y destino, minimizando tiempos de espera.</p>
+        </article>
+        <article class="card" data-aos="fade-up" data-aos-delay="120">
+          <i class="ph ph-headset"></i>
+          <h3>Coordinación 24/7</h3>
+          <p>Disponibilidad permanente para programar viajes y responder ante imprevistos.</p>
+        </article>
+        <article class="card" data-aos="fade-up" data-aos-delay="160">
+          <i class="ph ph-shield-check"></i>
+          <h3>Seguridad vial</h3>
+          <p>Procedimientos alineados a la norma ISO 39001 y cultura preventiva en toda la operación.</p>
+        </article>
+        <article class="card" data-aos="fade-up" data-aos-delay="200">
+          <i class="ph ph-wrench"></i>
+          <h3>Taller propio</h3>
+          <p>Horario de <b>06:00 a 22:00</b> y servicio de <b>emergencia 24 hs</b> para la flota.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================
+       Flota (usa sección "portfolio" del template)
+  ================================= -->
+  <section id="portfolio" class="section alt">
+    <div class="container">
+      <header class="section-head" data-aos="fade-up">
+        <span class="eyebrow">Nuestra flota</span>
+        <h2>Camiones e instalaciones</h2>
+        <p class="section-lead">Galería representativa (reemplazar tiles por fotos reales).</p>
+      </header>
+
+      <!-- Cada .tile puede llevar background-image en CSS inline o via clase -->
+      <div class="grid" data-aos="fade-up">
+        <a class="tile" href="#"><span class="tag"><i class="ph ph-truck"></i> Camión 1</span></a>
+        <a class="tile tall" href="#"><span class="tag"><i class="ph ph-truck-trailer"></i> Camión 2</span></a>
+        <a class="tile" href="#"><span class="tag"><i class="ph ph-warehouse"></i> Taller</span></a>
+        <a class="tile wide" href="#"><span class="tag"><i class="ph ph-buildings"></i> Instalaciones</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================
+       Cobertura (reusa "proceso")
+  ================================= -->
+  <section id="proceso" class="section">
+    <div class="container">
+      <header class="section-head" data-aos="fade-up">
+        <span class="eyebrow">Cobertura</span>
+        <h2>Operamos en todo Uruguay</h2>
+        <p class="section-lead">Base en Centenario (Durazno) y rutas coordinadas según la necesidad del cliente.</p>
+      </header>
+
+      <!-- Reutilizo el componente "steps" para listar puntos + el mapa -->
+      <ol class="steps" data-aos="fade-up">
+        <li><span class="step-idx"><i class="ph ph-map-pin"></i></span> Base: Cno. El Tala s/n, Centenario, Durazno</li>
+        <li><span class="step-idx"><i class="ph ph-road-horizon"></i></span> Rutas hacia plantas e industrias forestales</li>
+        <li><span class="step-idx"><i class="ph ph-headset"></i></span> Coordinación de viajes 24/7</li>
+      </ol>
+
+      <div style="margin-top:18px; border-radius:14px; overflow:hidden">
+        <iframe title="Ubicación base"
+          src="https://maps.google.com/maps?q=-32.841530,-56.510994&z=10&output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          style="width:100%; height:360px; border:0;"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================
+       Diferenciales (reusa "precios" como bloque de beneficios)
+  ================================= -->
+  <section id="precios" class="section alt">
+    <div class="container">
+      <header class="section-head" data-aos="fade-up">
+        <span class="eyebrow">Valor</span>
+        <h2>¿Por qué elegirnos?</h2>
+      </header>
+
+      <!-- Convertimos las 3 price-card en pilares/diferenciales -->
+      <div class="pricing" data-aos="fade-up">
+        <article class="price-card">
+          <div class="price-head">
+            <h3>Seguridad</h3>
+            <p class="price-note">Sistema de Gestión de Seguridad Vial</p>
+          </div>
+          <ul class="price-list">
+            <li><i class="ph ph-seal-check"></i> ISO 39001:2012</li>
+            <li><i class="ph ph-clipboard-text"></i> Procedimientos y auditorías</li>
+          </ul>
+        </article>
+
+        <article class="price-card featured">
+          <div class="badge-top"><i class="ph ph-crown-simple"></i> Operativa</div>
+          <div class="price-head">
+            <h3>Puntualidad & 24/7</h3>
+            <p class="price-note">Coordinación permanente</p>
+          </div>
+          <ul class="price-list">
+            <li><i class="ph ph-headset"></i> Coordinación de viajes 24/7</li>
+            <li><i class="ph ph-wrench"></i> Taller 06–22 hs + emergencias</li>
+          </ul>
+        </article>
+
+        <article class="price-card">
+          <div class="price-head">
+            <h3>Experiencia</h3>
+            <p class="price-note">+20 años en el rubro</p>
+          </div>
+          <ul class="price-list">
+            <li><i class="ph ph-users-three"></i> Equipo especializado</li>
+            <li><i class="ph ph-leaf"></i> Compromiso ambiental</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+
+<section id="testimonios" class="testimonios section">
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-up">Testimonios</h2>
+    <div class="slider">
+      <button class="slider-btn prev"><i class="ph ph-caret-left"></i></button>
+      <div id="slides" class="slides"></div>
+      <button class="slider-btn next"><i class="ph ph-caret-right"></i></button>
+    </div>
+  </div>
+</section>
+
+
+
+
+  <!-- ================================
+       Certificaciones (reusa “Testimonios” del template)
+  ================================= -->
+  <section id="certificaciones" class="section">
+    <div class="container">
+      <header class="section-head" data-aos="fade-up">
+        <span class="eyebrow">Confianza</span>
+        <h2>Certificaciones</h2>
+        <p class="section-lead">ISO 39001:2012 — Seguridad Vial (LSQA / IQNET).</p>
+      </header>
+
+      <!-- Bloque simple en lugar de slider -->
+      <div class="cards" data-aos="fade-up">
+        <article class="card">
+          <i class="ph ph-certificate"></i>
+          <h3>ISO 39001:2012</h3>
+          <p>Alcance: carga, descarga y traslado de madera en equipos pesados por vía terrestre. Vigencia 07/08/2024 – 07/08/2027.</p>
+          <!-- Reemplazá href por tus PDFs reales -->
+          <p style="margin-top:8px">
+            <a class="btn btn-ghost" href="./assets/certificados/Sandro-Fernandez-LSQA-ISO39001-2024.pdf" target="_blank">Ver LSQA</a>
+            <a class="btn btn-ghost" href="./assets/certificados/IQNET-22801.2024.pdf" target="_blank">Ver IQNET</a>
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================
+       FAQ
+  ================================= -->
+  <section id="faq" class="section alt">
+    <div class="container">
+      <header class="section-head" data-aos="fade-up">
+        <span class="eyebrow">Preguntas</span>
+        <h2>FAQ</h2>
+      </header>
+
+      <div class="faq" data-aos="fade-up">
+        <details class="faq-item" open>
+          <summary><i class="ph ph-question"></i> ¿Trabajan fuera de horario?</summary>
+          <p>Sí. Nuestro servicio de coordinación de viajes es <b>24/7</b>.</p>
+        </details>
+        <details class="faq-item">
+          <summary><i class="ph ph-shield-check"></i> ¿Qué medidas de seguridad aplican?</summary>
+          <p>Contamos con un SGSV certificado bajo la norma <b>ISO 39001</b>.</p>
+        </details>
+        <details class="faq-item">
+          <summary><i class="ph ph-map-pin"></i> ¿En qué zonas operan?</summary>
+          <p>Operamos en distintas regiones del país con base en Centenario, Durazno. Coordinamos rutas según la necesidad del cliente.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================
+       Contacto
+  ================================= -->
+  <section id="contacto" class="section cta">
+    <div class="container cta-inner" data-aos="zoom-in">
+      <header>
+        <h2>Contacto</h2>
+        <p class="section-lead">Coordinación de viajes y consultas.</p>
+      </header>
+
+      <form class="form" id="contact-form">
+        <div class="form-row">
+          <label>Nombre
+            <input required type="text" name="nombre" placeholder="Tu nombre" />
+          </label>
+          <label>Email
+            <input required type="email" name="email" placeholder="tu@mail.com" />
+          </label>
+        </div>
+        <label>Mensaje
+          <textarea name="mensaje" rows="4" placeholder="Escribe tu mensaje..."></textarea>
+        </label>
+        <div class="form-actions">
+          <button class="btn btn-cta" type="submit"><i class="ph ph-paper-plane-right"></i> Enviar</button>
+          <!-- Si preferís quitar WhatsApp en toda la web, comentá este botón -->
+          <button class="btn btn-ghost" type="button" id="btn-whatsapp">
+            <i class="ph ph-whatsapp-logo"></i> WhatsApp
+          </button>
+        </div>
+      </form>
+
+      <!-- Dirección / horarios (del bloque Contacto de la versión 1) -->
+      <ul class="list" style="margin-top:16px">
+        <li><i class="ph ph-map-pin"></i> Cno. El Tala s/n, Centenario, Durazno</li>
+        <li><i class="ph ph-wrench"></i> Taller: <b>06:00 a 22:00</b> — Emergencias: <b>24 hs</b></li>
+      </ul>
+
+      <div style="margin-top:16px; border-radius:14px; overflow:hidden; width:100%;">
+        <iframe title="Mapa de contacto"
+          src="https://maps.google.com/maps?q=-32.841530,-56.510994&z=12&output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          style="width:100%; height:300px; border:0;"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================
+       Footer
+  ================================= -->
+  <footer class="footer">
+    <div class="container footer-row">
+      <p>© <span id="year"></span> Sandro Fernández Transportes — Todos los derechos reservados.</p>
+      <div class="social">
+        <a href="#"><i class="ph ph-instagram-logo"></i></a>
+        <a href="#"><i class="ph ph-linkedin-logo"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+# 🌐 Landing Page — Sandro Fernández Transportes
+
+Landing page desarrollada para la empresa **Sandro Fernández Transportes**, enfocada en transporte forestal en Uruguay.  
+El sitio está optimizado para desktop y mobile, con animaciones suaves y un diseño moderno.
+
+---
+
+## 🚀 Tecnologías utilizadas
+- **HTML5** — estructura semántica
+- **CSS3** — variables, grid/flexbox, responsive design
+- **JavaScript (ES6)** — animaciones, contadores dinámicos, interacción con botones
+- **AOS (Animate on Scroll)** — animaciones al hacer scroll
+- **Phosphor Icons** — librería de íconos livianos
+- **Google Fonts** — tipografía principal
+- **Google Maps Embed** — mapa de ubicación
+
+---
+
+## 📂 Estructura del proyecto
+/landing-page
+├── index.html # Página principal
+├── css/
+│ └── styles.css # Estilos globales (variables, layout, componentes)
+├── js/
+│ └── main.js # Lógica de animaciones, contadores, interacción
+├── img/ # Logos e imágenes utilizadas
+└── README.md # Este archivo
+
+yaml
+Copiar
+Editar
+
+---
+
+## ✨ Funcionalidades
+- Hero principal con claim, CTA y métricas dinámicas:
+  - **Año de fundación** (1997)
+  - **Años de experiencia** (se calculan automáticamente según el año actual)
+  - **Coordinación 24/7**
+- Secciones de servicios y flota con estructura responsive
+- Bloque de **Contacto** con:
+  - Formulario (nombre, email, mensaje)
+  - Botón directo a **WhatsApp**
+  - Dirección, horarios y mapa embebido
+- Animaciones al hacer scroll (AOS)
+- Diseño **mobile-first** optimizado para pantallas chicas
+
+---
+
+## ⚙️ Configuración
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/usuario/landing-transporte.git
+Abrir index.html en el navegador.
+
+(No requiere backend, es un sitio estático.)
+
+📌 Personalización
+Editar la info de contacto en index.html (<section id="contacto">)
+
+Cambiar colores desde las variables CSS en :root dentro de css/styles.css
+
+Reemplazar imágenes de flota o servicios en la carpeta /img
+
+📜 Licencia
+Este proyecto fue desarrollado para fines comerciales de Sandro Fernández Transportes.
+No está permitido su uso o distribución sin autorización de la empresa.

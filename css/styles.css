@@ -654,3 +654,39 @@ body::after{
 
 /* Si algún término debe ir siempre junto (p.ej. “24/7”), podés usar esta clase */
 .nowrap{ white-space: nowrap; }
+
+
+
+/* Cobertura / filas con icono a la derecha: evita superposición en mobile */
+#proceso .steps li,
+#cobertura .steps li,
+.steps li.has-icon-right{
+  position: relative;
+  padding-right: 76px;              /* deja espacio para el botón/icono */
+  word-break: break-word;
+}
+
+#proceso .steps li .icon-right,
+#cobertura .steps li .icon-right,
+.steps li .icon-right{
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #ffffff12;
+  border: 1px solid var(--border);
+  pointer-events: none;             /* que no robe el scroll/taps */
+}
+
+@media (max-width: 420px){
+  #proceso .steps li,
+  #cobertura .steps li,
+  .steps li.has-icon-right{
+    padding-right: 88px;            /* un toque más de aire en teléfonos chicos */
+  }
+}

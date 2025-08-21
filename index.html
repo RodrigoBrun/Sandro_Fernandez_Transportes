@@ -114,10 +114,10 @@
                         <span class="num">24</span>
                         <span class="label">Coordinación 24/7</span>
                     </div>
-                    <div class="metric">
+                   <!--  <div class="metric">
                         <span class="num">39,001</span>
                         <span class="label">Norma ISO</span>
-                    </div>
+                    </div>-->
                 </div>
 
             </div>
@@ -361,50 +361,63 @@
         </div>
     </section>
 
-    <!-- ================================
-       Contacto
-  ================================= -->
-    <section id="contacto" class="section cta">
-        <div class="container cta-inner" data-aos="zoom-in">
-            <header>
-                <h2>Contacto</h2>
-                <p class="section-lead">Coordinación de viajes y consultas.</p>
-            </header>
+   <!-- ================================
+     Contacto
+================================= -->
+<section id="contacto" class="section cta">
+  <div class="container cta-inner" data-aos="zoom-in">
+    <header>
+      <h2>Contacto</h2>
+      <p class="section-lead">Coordinación de viajes y consultas.</p>
+    </header>
 
-            <form class="form" id="contact-form">
-                <div class="form-row">
-                    <label>Nombre
-                        <input required type="text" name="nombre" placeholder="Tu nombre" />
-                    </label>
-                    <label>Email
-                        <input required type="email" name="email" placeholder="tu@mail.com" />
-                    </label>
-                </div>
-                <label>Mensaje
-                    <textarea name="mensaje" rows="4" placeholder="Escribe tu mensaje..."></textarea>
-                </label>
-                <div class="form-actions">
-                    <button class="btn btn-cta" type="submit"><i class="ph ph-paper-plane-right"></i> Enviar</button>
-                    <!-- Si preferís quitar WhatsApp en toda la web, comentá este botón -->
-                    <button class="btn btn-ghost" type="button" id="btn-whatsapp">
-                        <i class="ph ph-whatsapp-logo"></i> WhatsApp
-                    </button>
-                </div>
-            </form>
+    <form class="form" id="contact-form">
+      <div class="form-row">
+        <label>Nombre
+          <input required type="text" name="nombre" placeholder="Tu nombre" />
+        </label>
+        <label>Email
+          <input required type="email" name="email" placeholder="tu@mail.com" />
+        </label>
+      </div>
+      <label>Mensaje
+        <textarea name="mensaje" rows="4" placeholder="Escribe tu mensaje..."></textarea>
+      </label>
+      <div class="form-actions">
+        <button class="btn btn-cta" type="submit">
+          <i class="ph ph-paper-plane-right"></i> Enviar
+        </button>
+        <!-- Si preferís quitar WhatsApp en toda la web, comentá este botón -->
+        <button class="btn btn-ghost" type="button" id="btn-whatsapp">
+          <i class="ph ph-whatsapp-logo"></i> WhatsApp
+        </button>
+      </div>
+    </form>
 
-            <!-- Dirección / horarios (del bloque Contacto de la versión 1) -->
-            <ul class="list" style="margin-top:16px">
-                <li><i class="ph ph-map-pin"></i> Cno. El Tala s/n, Centenario, Durazno</li>
-                <li><i class="ph ph-wrench"></i> Taller: <b>06:00 a 22:00</b> — Emergencias: <b>24 hs</b></li>
-            </ul>
+    <!-- Dirección / horarios -->
+    <div class="contact-info" style="margin-top:16px">
+      <p><i class="ph ph-map-pin"></i> Cno. El Tala s/n, Centenario, Durazno</p>
 
-            <div style="margin-top:16px; border-radius:14px; overflow:hidden; width:100%;">
-                <iframe title="Mapa de contacto"
-                    src="https://maps.google.com/maps?q=-32.841530,-56.510994&z=12&output=embed" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade" style="width:100%; height:300px; border:0;"></iframe>
-            </div>
-        </div>
-    </section>
+      <div class="hours">
+        <div class="label"><i class="ph ph-wrench"></i> Taller:</div>
+        <div class="value nowrap">06:00 – 22:00</div>
+
+        <div class="label"><i class="ph ph-headset"></i> Emergencias:</div>
+        <div class="value nowrap">24 hs</div>
+      </div>
+    </div>
+
+    <!-- Mapa -->
+    <div style="margin-top:16px; border-radius:14px; overflow:hidden; width:100%;">
+      <iframe title="Mapa de contacto"
+        src="https://maps.google.com/maps?q=-32.841530,-56.510994&z=12&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        style="width:100%; height:300px; border:0;"></iframe>
+    </div>
+  </div>
+</section>
+
 
     <!-- ================================
        Footer

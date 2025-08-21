@@ -60,26 +60,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ================================
 // 4) Contadores (cuando entran en viewport) — soporta:
-//    - data-static="1997"  (no anima)
-//    - data-from-year="1997" (calcula años y anima)
-//    - data-count="24" / "39001" (anima a ese número)
+//    - data-static="1997"          (no anima; imprime tal cual)
+//    - data-from-year="1997"       (calcula años y ANIMA)
+//    - data-count="24" / "39001"   (ANIMA a ese número)
+//    - opcional: data-format="group" (usa miles con punto)
 // ================================
-const formatNum = (n) => (n >= 1000 ? n.toLocaleString('es-UY') : String(n));
-
 const counters = $$('.metrics .num');
+
 if (counters.length) {
+  const wantsGrouping = (el) => (el.dataset.format || '').toLowerCase() === 'group';
+
+  const formatValue = (el, n, isFloat = false) => {
+    if (isFloat) return n.toFixed(1);
+    const i = Math.round(n);
+    return wantsGrouping(el) ? new Intl.NumberFormat('es-UY').format(i) : String(i);
+  };
+
   const getTarget = (el) => {
-    if (el.dataset.static) return null; // fijo, sin animación
+    // 1) Fijo (no animar): devolvemos null para que se maneje aparte
+    if (el.dataset.static != null) return null;
+
+    // 2) Años desde un año de inicio
     if (el.dataset.fromYear) {
       const y = parseInt(el.dataset.fromYear, 10);
       const now = new Date().getFullYear();
-      return Math.max(0, now - (isNaN(y) ? now : y));
+      const years = Math.max(0, now - (isNaN(y) ? now : y));
+      return years;
     }
+
+    // 3) Número directo a animar
     if (el.dataset.count) {
       const to = parseFloat(el.dataset.count);
       return isNaN(to) ? 0 : to;
     }
-    // fallback: si alguien puso un número adentro sin data-*, lo tomamos
+
+    // 4) Fallback: lee el contenido actual si hubiese un número
     const raw = parseFloat((el.textContent || '').replace(/\./g, '').replace(',', '.'));
     return isNaN(raw) ? 0 : raw;
   };
@@ -87,13 +102,15 @@ if (counters.length) {
   const animateTo = (el, to, dur = 1200) => {
     const isFloat = String(to).includes('.');
     const start = performance.now();
+
     const step = (now) => {
       const p = clamp((now - start) / dur, 0, 1);
       const eased = 1 - Math.pow(1 - p, 2); // easeOutQuad
       const val = to * eased;
-      el.textContent = isFloat ? val.toFixed(1) : formatNum(Math.round(val));
+      el.textContent = formatValue(el, val, isFloat);
       if (p < 1) requestAnimationFrame(step);
     };
+
     requestAnimationFrame(step);
   };
 
@@ -101,8 +118,10 @@ if (counters.length) {
     entries.forEach((e) => {
       if (!e.isIntersecting) return;
       const el = e.target;
-      if (el.dataset.static) {            // caso fijo
-        el.textContent = el.dataset.static;
+
+      // Caso fijo: imprime tal cual (sin formateo automático)
+      if (el.dataset.static != null) {
+        el.textContent = String(el.dataset.static);
       } else {
         const to = getTarget(el);
         animateTo(el, to);
@@ -113,6 +132,7 @@ if (counters.length) {
 
   counters.forEach((el) => io.observe(el));
 }
+
 
 
   // ================================

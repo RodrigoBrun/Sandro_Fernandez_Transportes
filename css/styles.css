@@ -462,3 +462,115 @@ body::after{
   /* Botones del form en fila completa si hay poco ancho */
   .form-actions .btn{ flex:1 1 100% }
 }
+
+
+
+
+
+.preview-item {
+  background-color: #1e1e1e; /* color de fondo por defecto */
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Ejemplo de imágenes específicas */
+.preview-item:nth-child(1) {
+  background-image: url("../imagenes/ISO.png"); /* La primera de arriba (lado izquierdo) */
+}
+.preview-item:nth-child(2) {
+  background-image: url("../imagenes/IQNET_Foto.png"); /* La grande del medio */
+}
+.preview-item:nth-child(3) {
+  background-image: url("../imagenes/Reloj_24:7.png");  /* La de mas a la derecha */
+  background-color: #0E7FB8;
+}
+.preview-item:nth-child(4) {
+  background-image: url("../imagenes/Logo_Sandro_Fernandez.jpeg");   /* La primera de abajo (lado izquierdo) */
+}
+/* Ajuste solo para el logo */
+.preview-item:nth-child(4) {
+  background-image: url("../imagenes/Logo_Sandro_Fernandez.jpeg");
+  background-size: contain;   /* Hace que se vea completo */
+  background-repeat: no-repeat; /* Evita que se repita */
+  background-position: center;  /* Centra el logo */
+  background-color: #f4f4f4; /* un gris claro más cercano al blanco del logo */
+}
+
+
+
+
+
+/* =========================================================
+   FIX ÚNICO — Servicios (desktop) + Valor (pill y cortes)
+   - No toca móvil (las reglas van solo para desktop)
+   - Arregla pill "Operativa" y el corte visual de la sección
+========================================================= */
+
+/* -------- Servicios (solo desktop) -------- */
+@media (min-width: 1200px){
+  /* 4 columnas en desktop ancho */
+  #servicios .cards{
+    grid-template-columns: repeat(4, minmax(240px, 1fr));
+    gap: 22px;
+    align-items: stretch;
+  }
+
+  /* Alturas consistentes sin “engordar” demasiado */
+  #servicios .card{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 220px;   /* más bajo que 240 para no verse gruesas */
+    padding: 20px;       /* un toque de aire, sin exagerar */
+  }
+
+  /* Centrar la 5ª tarjeta en segunda fila (queda prolijo) */
+  #servicios .cards > .card:last-child{
+    grid-column: 2 / span 2;
+  }
+
+  /* Un poco menos de “franja” al final de la sección en desktop */
+  #servicios.section{
+    padding-bottom: 72px;
+  }
+}
+
+/* -------- Valor (pill + corte de sección) -------- */
+
+/* Más aire arriba/abajo de la sección para que las cards no toquen el corte */
+@media (min-width: 1200px){
+  #valor.section{
+    padding-top:  88px;
+    padding-bottom: 88px;
+  }
+}
+
+/* Asegura aire arriba dentro de cada card de Valor */
+#valor .price-card{
+  padding-top: 30px;           /* aire sin hacerla “gorda” */
+}
+
+/* Si alguna está destacada, mantené el aire y evita que “suba” */
+#valor .price-card.featured{
+  padding-top: 34px;
+  transform: none;             /* evita que se vaya hacia el corte */
+}
+
+/* La pill/badge NO debe estar absoluta ni pegada al borde */
+#valor .price-card .pill,
+#valor .price-card .badge,
+#valor .price-card .badge-top{
+  position: static;            /* saca posicionamientos raros */
+  margin-top: 8px;             /* separación del borde superior */
+  margin-bottom: 10px;         /* separación del título */
+  line-height: 1.15;
+  align-self: flex-start;
+}
+
+/* Suaviza el gradiente de las secciones alternas en desktop (menos corte) */
+@media (min-width: 1200px){
+  .section.alt{
+    background: linear-gradient(180deg, #ffffff08 0%, #ffffff05 40%, transparent 100%);
+  }
+}

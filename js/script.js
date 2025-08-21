@@ -59,33 +59,61 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ================================
-  // 4) Contadores (cuando entran en viewport)
-  // ================================
-  const counters = $$('.num');
-  if (counters.length) {
-    const obsCounter = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        const to = parseFloat(el.getAttribute('data-count') || '0');
-        const isFloat = String(to).includes('.');
-        const dur = 1200;
-        const start = performance.now();
+// 4) Contadores (cuando entran en viewport) — soporta:
+//    - data-static="1997"  (no anima)
+//    - data-from-year="1997" (calcula años y anima)
+//    - data-count="24" / "39001" (anima a ese número)
+// ================================
+const formatNum = (n) => (n >= 1000 ? n.toLocaleString('es-UY') : String(n));
 
-        const step = (t) => {
-          const p = clamp((t - start) / dur, 0, 1);
-          // easeOutQuad
-          const eased = 1 - Math.pow(1 - p, 2);
-          const val = to * eased;
-          el.textContent = isFloat ? val.toFixed(1) : Math.round(val).toLocaleString();
-          if (p < 1) requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
-        obs.unobserve(el);
-      });
-    }, { threshold: .25 });
-    counters.forEach(c => obsCounter.observe(c));
-  }
+const counters = $$('.metrics .num');
+if (counters.length) {
+  const getTarget = (el) => {
+    if (el.dataset.static) return null; // fijo, sin animación
+    if (el.dataset.fromYear) {
+      const y = parseInt(el.dataset.fromYear, 10);
+      const now = new Date().getFullYear();
+      return Math.max(0, now - (isNaN(y) ? now : y));
+    }
+    if (el.dataset.count) {
+      const to = parseFloat(el.dataset.count);
+      return isNaN(to) ? 0 : to;
+    }
+    // fallback: si alguien puso un número adentro sin data-*, lo tomamos
+    const raw = parseFloat((el.textContent || '').replace(/\./g, '').replace(',', '.'));
+    return isNaN(raw) ? 0 : raw;
+  };
+
+  const animateTo = (el, to, dur = 1200) => {
+    const isFloat = String(to).includes('.');
+    const start = performance.now();
+    const step = (now) => {
+      const p = clamp((now - start) / dur, 0, 1);
+      const eased = 1 - Math.pow(1 - p, 2); // easeOutQuad
+      const val = to * eased;
+      el.textContent = isFloat ? val.toFixed(1) : formatNum(Math.round(val));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      if (el.dataset.static) {            // caso fijo
+        el.textContent = el.dataset.static;
+      } else {
+        const to = getTarget(el);
+        animateTo(el, to);
+      }
+      io.unobserve(el);
+    });
+  }, { threshold: 0.25 });
+
+  counters.forEach((el) => io.observe(el));
+}
+
 
   // ================================
   // 5) (Opcional) Slider de testimonios del template
@@ -145,3 +173,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // ================================
   $('#year') && ($('#year').textContent = new Date().getFullYear());
 });
+
+
+
+
+
+

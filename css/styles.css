@@ -690,3 +690,53 @@ body::after{
     padding-right: 88px;            /* un toque más de aire en teléfonos chicos */
   }
 }
+
+
+
+
+/* ================================
+   CARGA DE IMAGENES DE LA GALERIA
+================================ */
+
+.tile.camion1 {
+  background-image: url("../imagenes/");
+  background-size: cover;
+  background-position: center;
+}
+
+.tile.camion2 {
+  background-image: url("../imagenes/");
+  background-size: cover;
+  background-position: center;
+}
+
+.tile.taller {
+  background-image: url("../imagenes/");
+  background-size: cover;
+  background-position: center;
+}
+
+.tile.instalaciones {
+  background-image: url("../imagenes/");
+  background-size: cover;
+  background-position: center;
+}
+
+
+/* =========================
+   FIX — Fondo del footer
+   ========================= */
+.footer{
+  background: var(--footer-bg, var(--surface)); /* usa variable si existe, sino surface */
+  backdrop-filter: saturate(120%) blur(6px);   /* un blur elegante */
+}
+
+/* Tema oscuro */
+body:not(.theme-light) .footer{
+  background: linear-gradient(to top, #0b0d12ee, #0b0d1200); 
+}
+
+/* Tema claro */
+body.theme-light .footer{
+  background: linear-gradient(to top, #ffffffee, #ffffff00);
+}

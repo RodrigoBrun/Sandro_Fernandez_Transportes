@@ -482,7 +482,7 @@ body::after{
   background-image: url("../imagenes/IQNET_Foto.png"); /* La grande del medio */
 }
 .preview-item:nth-child(3) {
-  background-image: url("../imagenes/Reloj_24:7.png");  /* La de mas a la derecha */
+  background-image: url("../imagenes/Reloj_24_7.png");  /* La de mas a la derecha */
   background-color: #0E7FB8;
 }
 .preview-item:nth-child(4) {

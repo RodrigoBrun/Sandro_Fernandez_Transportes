@@ -196,6 +196,56 @@ if (counters.length) {
 
 
 
+/* =========================================================
+   Brand Preview — que sólo haya un <details> abierto a la vez
+========================================================= */
+document.addEventListener('DOMContentLoaded', () => {
+  const acc = document.querySelector('#brand-preview .brand-accordion');
+  if (!acc) return;
+
+  acc.addEventListener('toggle', (e) => {
+    const opened = e.target;
+    if (!(opened instanceof HTMLDetailsElement) || !opened.open) return;
+    acc.querySelectorAll('.bp-item[open]').forEach(d => {
+      if (d !== opened) d.removeAttribute('open');
+    });
+  }, true);
+});
 
 
+/* =========================================================
+   Brand Preview: acordeón con 1 abierto siempre (Misión por defecto)
+========================================================= */
+document.addEventListener('DOMContentLoaded', () => {
+  const acc = document.querySelector('#brand-preview .brand-accordion');
+  if (!acc) return;
+
+  // 1) Asegurar que "Misión" esté abierto al cargar
+  const items = acc.querySelectorAll('.bp-item');
+  if (items.length) items[0].setAttribute('open', '');
+
+  // 2) Only-one-open: cuando abrís uno, cierro los demás
+  acc.addEventListener('toggle', (e) => {
+    const d = e.target;
+    if (!(d instanceof HTMLDetailsElement)) return;
+    if (d.open) {
+      acc.querySelectorAll('.bp-item[open]').forEach(x => {
+        if (x !== d) x.open = false;
+      });
+    }
+  }, true);
+
+  // 3) Nunca dejar todo cerrado:
+  //    si intentás cerrar el único abierto, cancelo el cierre.
+  acc.addEventListener('click', (e) => {
+    const summary = e.target.closest('summary');
+    if (!summary) return;
+    const d = summary.parentElement;
+    const opened = acc.querySelectorAll('.bp-item[open]');
+    if (opened.length === 1 && opened[0] === d) {
+      // este es el único abierto → no dejo cerrarlo
+      e.preventDefault();
+    }
+  });
+});
 

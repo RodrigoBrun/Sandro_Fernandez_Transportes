@@ -35,14 +35,13 @@
     <header class="header" id="top">
         <div class="container header-row">
             <a class="brand" href="#top">
-                <!-- Tu logo sin fondo -->
-                <img src="imagenes/Logo_Sandro_Fernandez.jpeg" alt="Sandro Fernández Transportes"
+                <img src="imagenes/Logo_SandroFernandez_Blanco.svg" alt="Sandro Fernández Transportes"
                     style="height:32px; width:auto; object-fit:contain;">
-                <span>Sandro Fernández <b>Transportes</b></span>
+                <span class="brand-text">
+                    Sandro Fernández <br><b>Transportes</b>
+                </span>
             </a>
 
-            <!-- 🔗 Mantengo IDs del template 2 para no romper JS,
-           pero renombro los textos a nuestra estructura -->
             <nav class="nav">
                 <a class="nav-link" href="#servicios">Servicios</a>
                 <a class="nav-link" href="#portfolio">Flota</a>
@@ -50,12 +49,10 @@
                 <a class="nav-link" href="#precios">Diferenciales</a>
                 <a class="nav-link" href="#certificaciones">Certificaciones</a>
                 <a class="nav-link" href="#faq">FAQ</a>
-                <a class="btn btn-cta nav-cta" href="#contacto">
-                    <i class="ph ph-paper-plane-tilt"></i> Contacto
-                </a>
             </nav>
 
             <div class="header-actions">
+                <a class="btn btn-cta" href="#contacto"><i class="ph ph-paper-plane-tilt"></i> Contacto</a>
                 <button id="btn-theme" class="icon-btn" aria-label="Modo oscuro"><i
                         class="ph ph-moon-stars"></i></button>
                 <button id="btn-menu" class="icon-btn hide-desktop" aria-label="Abrir menú"><i
@@ -74,6 +71,81 @@
             <a class="btn btn-cta" href="#contacto"><i class="ph ph-paper-plane-tilt"></i> Contacto</a>
         </div>
     </header>
+
+
+    <!-- ================================
+     Intro de Marca — FULL BLEED
+     - Logo a todo el ancho (toca bordes)
+     - Previews Misión / Visión / Valores (desplegables)
+================================ -->
+    <section id="brand-preview" class="brand-preview edge-to-edge" aria-labelledby="brand-title">
+        <div class="brand-wrap">
+
+            <!-- LOGO FULL-BLEED -->
+            <div class="brand-logo-box" data-aos="zoom-in">
+                <!-- Usá PNG sin fondo si lo tenés -->
+                <img class="brand-logo-full" src="imagenes/Logo_Sandro_Fernandez.jpeg"
+                    alt="Sandro Fernández Transportes">
+            </div>
+
+            <!-- Subtítulo/claim breve (no repetimos el hero) -->
+            <p id="brand-title" class="brand-tagline" data-aos="fade-up">
+                Transporte forestal seguro, eficiente y confiable.
+            </p>
+
+            <!-- PREVIEWS DESPLEGABLES -->
+            <div class="brand-accordion" data-aos="fade-up" data-aos-delay="80">
+                <details class="bp-item" open>
+                    <summary>
+                        <i class="ph ph-target"></i>
+                        <span>Misión</span>
+                        <i class="ph ph-caret-down chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="bp-content">
+                        Brindar servicios de transporte forestal confiables, eficientes y seguros,
+                        cumpliendo con altos estándares de calidad operativa y seguridad vial.
+                        Fortalecemos la relación de confianza con nuestros clientes y cuidamos a
+                        nuestro equipo humano en cada etapa del proceso.
+                    </div>
+                </details>
+
+                <details class="bp-item">
+                    <summary>
+                        <i class="ph ph-binoculars"></i>
+                        <span>Visión</span>
+                        <i class="ph ph-caret-down chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="bp-content">
+                        Ser una empresa referente en el transporte forestal en Uruguay,
+                        reconocida por la excelencia operativa, la seguridad, la responsabilidad
+                        laboral y la mejora continua.
+                    </div>
+                </details>
+
+                <details class="bp-item">
+                    <summary>
+                        <i class="ph ph-handshake"></i>
+                        <span>Valores</span>
+                        <i class="ph ph-caret-down chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="bp-content">
+                        <ul class="bp-list">
+                            <li><b>Compromiso:</b> responsabilidad en cada tarea, con clientes y equipo.</li>
+                            <li><b>Seguridad:</b> cultura preventiva respaldada por certificación.</li>
+                            <li><b>Experiencia:</b> más de dos décadas en el rubro.</li>
+                            <li><b>Adaptabilidad:</b> procesos y flota que evolucionan con el mercado.</li>
+                            <li><b>Transparencia:</b> relaciones basadas en honestidad y cumplimiento.</li>
+                            <li><b>Trabajo en equipo:</b> esfuerzo conjunto para objetivos comunes.</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+
+        </div>
+    </section>
+
+
+
 
     <!-- ================================
        Hero
@@ -114,7 +186,7 @@
                         <span class="num">24</span>
                         <span class="label">Coordinación 24/7</span>
                     </div>
-                   <!--  <div class="metric">
+                    <!--  <div class="metric">
                         <span class="num">39,001</span>
                         <span class="label">Norma ISO</span>
                     </div>-->
@@ -130,10 +202,9 @@
                     <div class="preview-body">
                         <div class="preview-hero">
                             <div class="chip"><i class="ph ph-seal-check"></i> ISO 39001</div>
-                            <div class="chip">
-                                <i class="ph ph-certificate"></i>IQNet
-                            </div>
-                            <div class="chip"><i class="ph ph-headset"></i> 24/7</div>
+                            <div class="chip"><i class="ph ph-map-trifold"></i> Recorrido seguro</div>
+                            <div class="chip"><i class="ph ph-warehouse"></i> Taller & logística</div>
+                            <div class="chip"><i class="ph ph-fire-extinguisher"></i> Seguridad industrial</div>
                         </div>
                         <div class="preview-grid">
                             <div class="preview-item"></div>
@@ -144,6 +215,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -196,18 +268,21 @@
             <header class="section-head" data-aos="fade-up">
                 <span class="eyebrow">Nuestra flota</span>
                 <h2>Camiones e instalaciones</h2>
-                <p class="section-lead">Galería representativa (reemplazar tiles por fotos reales).</p>
+                <p class="section-lead">Contamos con camiones modernos y un taller propio que aseguran puntualidad,
+                    seguridad y respaldo en cada viaje.</p>
             </header>
 
-            <!-- Cada .tile puede llevar background-image en CSS inline o via clase -->
             <div class="grid" data-aos="fade-up">
-                <a class="tile" href="#"><span class="tag"><i class="ph ph-truck"></i> Camión 1</span></a>
-                <a class="tile tall" href="#"><span class="tag"><i class="ph ph-truck-trailer"></i> Camión 2</span></a>
-                <a class="tile" href="#"><span class="tag"><i class="ph ph-warehouse"></i> Taller</span></a>
-                <a class="tile wide" href="#"><span class="tag"><i class="ph ph-buildings"></i> Instalaciones</span></a>
+                <a class="tile camion1" href="#"><span class="tag"><i class="ph ph-truck"></i> Camión 1</span></a>
+                <a class="tile tall camion2" href="#"><span class="tag"><i class="ph ph-truck-trailer"></i> Camión
+                        2</span></a>
+                <a class="tile taller" href="#"><span class="tag"><i class="ph ph-warehouse"></i> Taller</span></a>
+                <a class="tile wide instalaciones" href="#"><span class="tag"><i class="ph ph-buildings"></i>
+                        Instalaciones</span></a>
             </div>
         </div>
     </section>
+
 
     <!-- ================================
        Cobertura (reusa "proceso")
@@ -361,76 +436,81 @@
         </div>
     </section>
 
-   <!-- ================================
+    <!-- ================================
      Contacto
 ================================= -->
-<section id="contacto" class="section cta">
-  <div class="container cta-inner" data-aos="zoom-in">
-    <header>
-      <h2>Contacto</h2>
-      <p class="section-lead">Coordinación de viajes y consultas.</p>
-    </header>
+    <section id="contacto" class="section cta">
+        <div class="container cta-inner" data-aos="zoom-in">
+            <header>
+                <h2>Contacto</h2>
+                <p class="section-lead">Coordinación de viajes y consultas.</p>
+            </header>
 
-    <form class="form" id="contact-form">
-      <div class="form-row">
-        <label>Nombre
-          <input required type="text" name="nombre" placeholder="Tu nombre" />
-        </label>
-        <label>Email
-          <input required type="email" name="email" placeholder="tu@mail.com" />
-        </label>
-      </div>
-      <label>Mensaje
-        <textarea name="mensaje" rows="4" placeholder="Escribe tu mensaje..."></textarea>
-      </label>
-      <div class="form-actions">
-        <button class="btn btn-cta" type="submit">
-          <i class="ph ph-paper-plane-right"></i> Enviar
-        </button>
-        <!-- Si preferís quitar WhatsApp en toda la web, comentá este botón -->
-        <button class="btn btn-ghost" type="button" id="btn-whatsapp">
-          <i class="ph ph-whatsapp-logo"></i> WhatsApp
-        </button>
-      </div>
-    </form>
+            <form class="form" id="contact-form">
+                <div class="form-row">
+                    <label>Nombre
+                        <input required type="text" name="nombre" placeholder="Tu nombre" />
+                    </label>
+                    <label>Email
+                        <input required type="email" name="email" placeholder="tu@mail.com" />
+                    </label>
+                </div>
+                <label>Mensaje
+                    <textarea name="mensaje" rows="4" placeholder="Escribe tu mensaje..."></textarea>
+                </label>
+                <div class="form-actions">
+                    <button class="btn btn-cta" type="submit">
+                        <i class="ph ph-paper-plane-right"></i> Enviar
+                    </button>
+                    <!-- Si preferís quitar WhatsApp en toda la web, comentá este botón -->
+                    <button class="btn btn-ghost" type="button" id="btn-whatsapp">
+                        <i class="ph ph-whatsapp-logo"></i> WhatsApp
+                    </button>
+                </div>
+            </form>
 
-    <!-- Dirección / horarios -->
-    <div class="contact-info" style="margin-top:16px">
-      <p><i class="ph ph-map-pin"></i> Cno. El Tala s/n, Centenario, Durazno</p>
+            <!-- Dirección / horarios -->
+            <div class="contact-info" style="margin-top:16px">
+                <p><i class="ph ph-map-pin"></i> Cno. El Tala s/n, Centenario, Durazno</p>
 
-      <div class="hours">
-        <div class="label"><i class="ph ph-wrench"></i> Taller:</div>
-        <div class="value nowrap">06:00 – 22:00</div>
+                <div class="hours">
+                    <div class="label"><i class="ph ph-wrench"></i> Taller:</div>
+                    <div class="value nowrap">06:00 – 22:00</div>
 
-        <div class="label"><i class="ph ph-headset"></i> Emergencias:</div>
-        <div class="value nowrap">24 hs</div>
-      </div>
-    </div>
+                    <div class="label"><i class="ph ph-headset"></i> Emergencias:</div>
+                    <div class="value nowrap">24 hs</div>
+                </div>
+            </div>
 
-    <!-- Mapa -->
-    <div style="margin-top:16px; border-radius:14px; overflow:hidden; width:100%;">
-      <iframe title="Mapa de contacto"
-        src="https://maps.google.com/maps?q=-32.841530,-56.510994&z=12&output=embed"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        style="width:100%; height:300px; border:0;"></iframe>
-    </div>
-  </div>
-</section>
+            <!-- Mapa -->
+            <div style="margin-top:16px; border-radius:14px; overflow:hidden; width:100%;">
+                <iframe title="Mapa de contacto"
+                    src="https://maps.google.com/maps?q=-32.841530,-56.510994&z=12&output=embed" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade" style="width:100%; height:300px; border:0;"></iframe>
+            </div>
+        </div>
+    </section>
 
 
     <!-- ================================
-       Footer
-  ================================= -->
+   Footer
+================================= -->
     <footer class="footer">
         <div class="container footer-row">
-            <p>© <span id="year"></span> Sandro Fernández Transportes — Todos los derechos reservados.</p>
+            <div>
+                <p>© <span id="year"></span> Sandro Fernández Transportes — Todos los derechos reservados.</p>
+                <span class="dev-signature">
+                    Diseñado y desarrollado por
+                    <a href="https://tu-portafolio.com" target="_blank"><b>Rodrigo Brun</b></a>
+                </span>
+            </div>
             <div class="social">
                 <a href="#"><i class="ph ph-instagram-logo"></i></a>
                 <a href="#"><i class="ph ph-linkedin-logo"></i></a>
             </div>
         </div>
     </footer>
+
 
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="js/script.js"></script>

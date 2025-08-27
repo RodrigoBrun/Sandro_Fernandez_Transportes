@@ -476,25 +476,25 @@ body::after{
 
 /* Ejemplo de imágenes específicas */
 .preview-item:nth-child(1) {
-  background-image: url("../imagenes/ISO.png"); /* La primera de arriba (lado izquierdo) */
+  background-image: url("../imagenes/gasolina_galeria.jpg"); /* La primera de arriba (lado izquierdo) */
 }
 .preview-item:nth-child(2) {
-  background-image: url("../imagenes/IQNET_Foto.png"); /* La grande del medio */
+  background-image: url("../imagenes/mapa_galeria.jpg"); /* La grande del medio */
 }
 .preview-item:nth-child(3) {
-  background-image: url("../imagenes/Reloj_24_7.png");  /* La de mas a la derecha */
+  background-image: url("../imagenes/neumaticos_galeria.jpg");  /* La de mas a la derecha */
   background-color: #0E7FB8;
 }
 .preview-item:nth-child(4) {
-  background-image: url("../imagenes/Logo_Sandro_Fernandez.jpeg");   /* La primera de abajo (lado izquierdo) */
+  background-image: url("../imagenes/extintor_galeria.jpg");   /* La primera de abajo (lado izquierdo) */
 }
 /* Ajuste solo para el logo */
 .preview-item:nth-child(4) {
-  background-image: url("../imagenes/Logo_Sandro_Fernandez.jpeg");
-  background-size: contain;   /* Hace que se vea completo */
+  background-image: url("../imagenes/extintor_galeria.jpg");
   background-repeat: no-repeat; /* Evita que se repita */
   background-position: center;  /* Centra el logo */
   background-color: #f4f4f4; /* un gris claro más cercano al blanco del logo */
+  --zoom: 2.20;
 }
 
 
@@ -694,32 +694,144 @@ body::after{
 
 
 
+/* =========================================================
+   GALERÍA — CONTROL FINO POR TILE (posición + zoom)
+   Uso:
+   - Ajustá --x y --y para mover el encuadre (0%..100% o en px).
+   - Ajustá --zoom si querés acercar la imagen (1 = normal).
+   - Se mantiene background-size: cover para llenar el bloque.
+   - Si necesitás MÁS zoom del que cover da, ver sección "zoom fuerte".
+========================================================= */
+
+/* Base común de todos los tiles */
+.tile{
+  /* ⚙️ Valores por defecto (se pueden sobrescribir por tile) */
+  --x: 50%;     /* 0% = izquierda, 100% = derecha */
+  --y: 50%;     /* 0% = arriba,    100% = abajo   */
+  --zoom: 1;    /* 1 = sin zoom, 1.1 = 10% más grande */
+
+  background-repeat: no-repeat;
+  background-size: cover;                 /* llena el contenedor */
+  background-position: var(--x) var(--y); /* mueve el encuadre  */
+  /* Truco de zoom sutil: hacemos “cover” + un escalado extra */
+  /* (aumenta el tamaño de la imagen por encima de cover)     */
+  background-size:
+    calc(100% * var(--zoom))             /* ancho escalado  */
+    auto;                                /* alto auto (respeta proporción) */
+  /* NOTA: si tu tile es mucho más alto que ancho, el zoom puede variar.
+           Para volver al cover puro, poné --zoom: 1 en ese tile. */
+}
+
 /* ================================
-   CARGA DE IMAGENES DE LA GALERIA
+   CARGA DE IMÁGENES (por tile)
+   👉 Editá SOLO las variables --x, --y, --zoom de cada uno
 ================================ */
 
-.tile.camion1 {
-  background-image: url("../imagenes/");
-  background-size: cover;
-  background-position: center;
+/* 🚛 Camión 1 */
+.tile.camion1{
+  background-image: url("../imagenes/camion_blanco_galeria.jpg");
+
+  /* 🎯 Encadre inicial recomendado (modificá a gusto) */
+  --x: 500%;     /* mover a izquierda/derecha: 40%, 60%, etc. */
+  --y: 70%;     /* subir/bajar: 30%, 45%, etc. */
+  --zoom: 1.00; /* 1.00–1.20 suele ser suficiente */
 }
 
-.tile.camion2 {
-  background-image: url("../imagenes/");
-  background-size: cover;
-  background-position: center;
+/* 🚛 Camión 2 */
+.tile.camion2{
+  background-image: url("../imagenes/camion_celeste_galeria.jpg");
+
+  /* El camión está a derecha → llevamos el encuadre hacia la derecha */
+  --x: 62%;     /*60–70% para “correr” el foco a la derecha */
+  --y: 70%;     /* ajustá si corta techo/suelo */
+  --zoom: 1.05; /* un toque de zoom para evitar bordes vacíos */
 }
 
-.tile.taller {
-  background-image: url("../imagenes/");
-  background-size: cover;
-  background-position: center;
+/* 🛠️ Taller */
+.tile.taller{
+  background-image: url("../imagenes/taller_galeria.jpeg");
+
+  /* Suelen cortar cielo/suelo: centramos apenas bajo la mitad */
+  --x: 50%;
+  --y: 55%;
+  --zoom: 1.30;
 }
 
-.tile.instalaciones {
-  background-image: url("../imagenes/");
-  background-size: cover;
-  background-position: center;
+/* 🏭 Instalaciones */
+.tile.instalaciones{
+  background-image: url("../imagenes/instalaciones_galeria.jpg");
+
+  /* El galpón queda bien centrado, con pequeño zoom */
+  --x: 50%;
+  --y: 52%;
+  --zoom: 1.00;
+}
+
+/* ===========================================
+   OPCIONAL — Ajustes específicos para mobile
+   (A veces en pantallas angostas conviene reencuadrar)
+=========================================== */
+@media (max-width: 768px){
+
+  /* 🚛 Camión 1 */
+  .tile.camion1{
+    --x: 50%;   /* centramos horizontal */
+    --y: 65%;   /* bajamos un poco el encuadre para que entre bien la cabina */
+    --zoom: 1.80; /* le damos zoom para que rellene sin bordes */
+  }
+
+  /* 🚛 Camión 2 */
+  .tile.camion2{
+    --x: 60%;   /* corremos un poco a la derecha */
+    --y: 77%;   /* subimos encuadre para que no corte el techo */
+    --zoom: 1.75; /* más zoom porque en mobile se ve más “estirado” */
+  }
+
+  /* 🛠️ Taller */
+  .tile.taller{
+    --x: 40%;
+    --y: 60%;   /* subimos encuadre para no perder el galpón */
+    --zoom: 1.72; /* zoom medio para que rellene bien el ancho */
+  }
+
+  /* 🏭 Instalaciones */
+  .tile.instalaciones{
+    --x: 50%;
+    --y: 62%;   /* bajamos encuadre para mostrar más piso y evitar cielo vacío */
+    --zoom: 1.20; /* zoom para rellenar ancho y alto */
+  }
+}
+
+
+/* ===========================================
+   ZOOM FUERTE (si necesitás MUCHA aproximación)
+   Activalo agregando la clase .zoomable al tile.
+   - Esto reemplaza “cover” por un ancho en % mayor a 100.
+   - Útil cuando querés recortar bastante una foto.
+=========================================== */
+.tile.zoomable{
+  background-size: calc(100% * var(--zoom)) auto !important;
+  /* Ejemplo:
+     .tile.camion2.zoomable { --zoom: 1.25; }  // 25% más grande
+  */
+}
+
+/* ===========================================
+   AYUDA VISUAL (debug): guía para encuadrar
+   - Agregá .debug-bg a un tile para ver una cuadrícula.
+=========================================== */
+.tile.debug-bg{
+  position: relative;
+}
+.tile.debug-bg::after{
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size: 10% 100%, 100% 10%;   /* rejilla 10x10 */
+  border-radius: inherit;
 }
 
 
@@ -739,4 +851,787 @@ body:not(.theme-light) .footer{
 /* Tema claro */
 body.theme-light .footer{
   background: linear-gradient(to top, #ffffffee, #ffffff00);
+}
+
+
+
+/* Firma del desarrollador en el footer */
+.footer .dev-signature {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--muted); /* gris elegante */
+}
+
+.footer .dev-signature b {
+  color: var(--primary); /* usa el celeste corporativo */
+  font-weight: 600;
+}
+
+
+.footer .dev-signature {
+  display: block;
+  margin-top: 6px;     /* más airecito */
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+
+.footer .dev-signature b:hover {
+  text-decoration: underline;
+  filter: brightness(1.1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   Intro de Marca — FULL BLEED
+   - edge-to-edge: hace que la sección “toque” los bordes de la pantalla
+   - Logo grande a 100vw (sin márgenes laterales)
+   - Previews con <details> minimalistas y fluidos
+========================================================= */
+
+.edge-to-edge{
+  /* saca el límite del .container y estira el fondo/anchura a 100vw */
+  margin-inline: calc(50% - 50vw);
+  width: 100vw;
+}
+
+.brand-preview{
+  /* fondo sutil para diferenciar del hero */
+  background: radial-gradient(120% 120% at 50% -10%,
+              color-mix(in oklab, var(--bg) 90%, #0b6ea8 10%) 0%,
+              transparent 60%) ,
+              var(--bg);
+  padding: 0 0 clamp(28px, 5vw, 40px); /* sin padding arriba: el logo ya empuja */
+  position: relative;
+}
+
+/* wrapper con padding vertical y sin limitar el ancho */
+.brand-wrap{
+  padding-top: clamp(18px, 3vw, 28px);
+}
+
+/* ===== Logo full-bleed ===== */
+.brand-logo-box{
+  /* bloque que “pega” la imagen a los bordes */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);  /* centra el 100vw en el viewport */
+  margin-right: calc(50% - 50vw);
+}
+.brand-logo-full{
+  display: block;
+  width: 100vw;      /* toca bordes */
+  height: clamp(120px, 26vw, 260px); /* alto flexible; ajustá a gusto */
+  object-fit: contain;
+  object-position: center;
+  /* un pelín de sombra para que respire sobre fondos claros/osc */
+  filter: drop-shadow(0 10px 24px rgba(0,0,0,.18));
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Claim/leyenda */
+.brand-tagline{
+  text-align: center;
+  margin: clamp(10px, 2vw, 16px) auto clamp(8px, 2vw, 16px);
+  max-width: 62ch;
+  color: var(--muted);
+}
+
+/* ===== Accordion (details) ===== */
+.brand-accordion{
+  max-width: min(980px, 92vw);
+  margin: 0 auto;
+  display: grid;
+  gap: 10px;
+}
+
+.bp-item{
+  background: color-mix(in oklab, var(--surface) 88%, var(--bg) 12%);
+  border: 1px solid color-mix(in oklab, var(--surface-2) 70%, transparent 30%);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color .2s ease, background .2s ease;
+}
+
+.bp-item[open]{ /* realce al expandir */
+  background: color-mix(in oklab, var(--surface) 94%, var(--bg) 6%);
+  border-color: color-mix(in oklab, var(--primary) 35%, var(--surface-2) 65%);
+}
+
+.bp-item > summary{
+  list-style: none;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: clamp(12px, 2.2vw, 16px);
+  font-weight: 600;
+}
+
+.bp-item > summary::-webkit-details-marker{ display: none; }
+
+.bp-item .chevron{
+  transition: transform .2s ease;
+  opacity: .8;
+}
+.bp-item[open] .chevron{ transform: rotate(180deg); }
+
+.bp-content{
+  padding: 0 clamp(12px, 2.2vw, 16px) clamp(12px, 2.2vw, 16px);
+  color: var(--text);
+  line-height: 1.6;
+}
+.bp-content + .bp-content{ padding-top: 0; }
+
+.bp-list{
+  margin: 0; padding-left: 18px;
+  display: grid; gap: 6px;
+}
+
+/* Responsive fino */
+@media (max-width: 640px){
+  .brand-logo-full{ height: clamp(120px, 32vw, 200px); }
+  .bp-item > summary{ padding: 12px 14px; }
+  .bp-content{ padding: 0 14px 14px; }
+}
+
+/* Modo claro: realce suave */
+:root[data-theme="light"] .bp-item{
+  background: #fff;
+  border-color: rgba(0,0,0,.08);
+}
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   BRAND PREVIEW — Desktop en 2 columnas (logo + texto)
+   - No deforma el logo (quality first)
+   - Mobile queda igual que ahora
+========================================================= */
+
+/* Sólo en PC */
+@media (min-width: 992px){
+
+  /* 1) Armamos grilla 2 columnas dentro del wrapper */
+  #brand-preview .brand-wrap{
+    /* centralizamos el contenido dentro del full-bleed */
+    max-width: 1200px;               /* ajustá si tu container es otro */
+    margin: 0 auto;
+    padding: 16px 24px 24px;         /* un poco de aire interno */
+
+    display: grid;
+    grid-template-columns: minmax(420px, 560px) 1fr; /* logo | textos */
+    grid-template-areas:
+      "logo tagline"
+      "logo info";
+    column-gap: 28px;
+    row-gap: 14px;
+  }
+
+  /* 2) Cancelamos el full-bleed del logo (en desktop no lo estiramos) */
+  #brand-preview .brand-logo-box{
+    grid-area: logo;
+    width: auto;                     /* quita el 100vw del modo mobile */
+    margin: 0;                       /* quita los calc(50% - 50vw) */
+    padding: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: transparent;         /* por si quedó fondo */
+  }
+
+  /* 3) Logo con calidad: sin deformar, escala máxima controlada */
+  #brand-preview .brand-logo-full{
+    width: 100%;
+    height: auto;                    /* mantiene proporción */
+    max-width: 560px;                /* ↔ ajustá: 480–640px según guste */
+    object-fit: contain;
+    object-position: center;
+    filter: drop-shadow(0 6px 16px rgba(0,0,0,.12));
+  }
+
+  /* 4) Tagline arriba a la derecha */
+  #brand-preview .brand-tagline{
+    grid-area: tagline;
+    margin: 4px 0 6px 0;
+    text-align: left;                /* alinear con el acordeón */
+  }
+
+  /* 5) Acordeón a la derecha, pegado al logo */
+  #brand-preview .brand-accordion{
+    grid-area: info;
+    margin-top: 0;
+  }
+}
+
+/* 🔒 Mobile y tablets pequeñas mantienen el diseño actual
+   (logo full-bleed estirado si así lo definiste) */
+
+
+   /* =========================================================
+   BRAND PREVIEW — móvil: logo full-bleed pegado al header
+   (desktop queda como lo tenés ahora con 2 columnas)
+========================================================= */
+
+@media (max-width: 991.98px){
+  /* sin aire arriba: toca el header */
+  #brand-preview{ padding-top: 0 !important; }
+  #brand-preview .brand-wrap{ padding-top: 0 !important; }
+  #brand-preview .brand-logo-box{
+    margin-top: -1px;                /* borra línea/sombra bajo header */
+  }
+
+  /* logo a todo el ancho del viewport */
+  #brand-preview .brand-logo-box{
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 0;
+  }
+  #brand-preview .brand-logo-full{
+    width: 100%;
+    height: 180px;                   /* si querés menos, probá 160px */
+    object-fit: fill;                /* lo estira a los lados (como antes) */
+    object-position: center;
+    max-width: none;
+  }
+
+  /* tagline centrada como antes en móvil */
+  #brand-preview .brand-tagline{
+    text-align: center;
+    margin: 10px auto 8px;
+  }
+}
+
+
+
+/* =========================================================
+   HOTFIX FINAL — Header desktop sin solapamientos
+   - Gradiente “cinta” intacto
+   - 3 zonas en grid: [brand] | [nav centrado] | [actions]
+   - Espacio real entre "Contacto" y los iconos
+   - Mobile NO se toca
+   Pegar al FINAL del CSS
+========================================================= */
+
+@media (min-width: 992px){
+
+  /* Fondo y altura del header (por si algún estilo lo pisa) */
+  .header{
+    background: linear-gradient(90deg, #1c1c1c 0%, #0077c8 100%) !important;
+    height: var(--header-h);
+    min-height: var(--header-h);
+    position: sticky; top: 0; z-index: 100;
+    border-bottom: 1px solid rgba(0,0,0,.15);
+    -webkit-backdrop-filter: saturate(120%) blur(6px);
+    backdrop-filter: saturate(120%) blur(6px);
+  }
+
+  /* 3 columnas fijas: IZQ (brand) | CENTRO (nav) | DER (actions) */
+  .header .container.header-row{
+    display: grid !important;
+    grid-template-columns: auto 1fr auto;   /* ← clave para que nada se empuje */
+    align-items: center;
+    gap: 22px;
+    width: 100%;
+  }
+
+  /* --- BRAND (izquierda) ---------------------------------- */
+  .header .brand{
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 240px;                       /* reserva de ancho segura */
+    max-width: 380px;                       /* evita invadir el nav */
+    overflow: hidden;
+  }
+  .header .brand img{ height: 28px; width: auto; object-fit: contain; }
+  .header .brand span{
+    display: block;
+    white-space: normal;                    /* permite tu <br> */
+    line-height: 1.1;
+    overflow: visible; text-overflow: clip; /* nunca "..." */
+    color: #fff; font-weight: 700;
+  }
+  .header .brand span b{
+    display: block; font-weight: 700; color: #bfe8ff; /* “Transportes” clarito */
+  }
+
+  /* --- NAV (centro) --------------------------------------- */
+  .header .nav{
+    justify-self: center;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    min-width: 0;                           /* para que el grid no reviente */
+  }
+
+  /* Link legible */
+  .header .nav-link{
+    color: #8fd9ff !important;
+    font-weight: 600; white-space: nowrap;
+    text-shadow: 0 1px 0 rgba(0,0,0,.25);
+    transition: color .15s ease;
+  }
+  .header .nav-link:hover{ color: #e8f7ff !important; }
+  .header .nav-link.active,
+  .header .nav-link[aria-current="page"]{ color:#ffffff !important; }
+
+  /* Botón "Contacto" vive dentro del NAV pero se separa de ACTIONS */
+  .header .nav-cta{
+    margin-right: clamp(18px, 2.4vw, 36px); /* ← espacio real antes de los iconos */
+    flex: 0 0 auto;
+  }
+
+  /* --- ACTIONS (derecha) ---------------------------------- */
+  .header .header-actions{
+    justify-self: end;
+    display: flex !important;
+    align-items: center;
+    gap: 12px;                              /* espacio entre los 2 iconos */
+    /* nada de márgenes negativos ni posiciones raras */
+  }
+  .header .btn,
+  .header .icon-btn{
+    position: static !important;            /* evita overlays sobre "Contacto" */
+  }
+}
+
+/* Mobile/tablets chicas: sin cambios de layout del header */
+@media (max-width: 991.98px){
+  /* no tocamos tu comportamiento móvil */
+}
+
+
+/* =========================================================
+   HOTFIX FINAL — Aire entre Brand y Nav
+   ========================================================= */
+@media (min-width: 992px){
+  .header .brand{
+    margin-right: clamp(20px, 2.8vw, 36px); /* más aire antes de Servicios */
+  }
+
+  /* Ajuste del nav para mantenerlo centrado */
+  .header .nav{
+    gap: 22px; /* el espacio entre cada link */
+  }
+}
+
+
+/* =========================================================
+   PARCHE ÚNICO — Header desktop sin solapes (grid 3 columnas)
+   Pegar al FINAL del CSS
+========================================================= */
+@media (min-width: 992px){
+
+  /* Cinta con gradiente + altura fija */
+  .header{
+    background: linear-gradient(90deg,#1c1c1c 0%,#0077c8 100%) !important;
+    height: var(--header-h);
+    min-height: var(--header-h);
+    position: sticky; top: 0; z-index: 100;
+    -webkit-backdrop-filter: saturate(120%) blur(6px);
+    backdrop-filter: saturate(120%) blur(6px);
+    border-bottom: 1px solid rgba(0,0,0,.15);
+  }
+
+  /* 3 zonas firmes: [brand] | [nav] | [actions] */
+  .header .container.header-row{
+    display: grid !important;
+    grid-template-columns: minmax(260px,auto) 1fr auto; /* IZQ | CENTRO | DER */
+    align-items: center;
+    gap: clamp(16px, 2.4vw, 28px);
+    width: 100%;
+    overflow: visible;
+  }
+
+  /* BRAND (izquierda): 2 líneas y sin cortar */
+  .header .brand{
+    grid-column: 1;
+    justify-self: start;
+    display: inline-flex; align-items: center; gap: 10px;
+    min-width: 260px;           /* reserva real */
+    max-width: 380px;           /* no invade el nav */
+    overflow: hidden;
+    margin-right: 0 !important; /* pisa parches previos */
+  }
+  .header .brand .brand-text{
+    white-space:normal; line-height:1.1;
+    overflow:visible; text-overflow:clip;
+    color:#fff; font-weight:700;
+  }
+  .header .brand .brand-text b{
+    display:block; font-weight:700; color:#bfe8ff; /* “Transportes” clarito */
+  }
+  .header .brand img{ height:28px; width:auto; object-fit:contain; }
+
+  /* NAV (centro): centrado, sin wrap, con aire */
+  .header .nav{
+    grid-column: 2;
+    justify-self: center;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(16px, 2vw, 24px);
+    min-width: 0;            /* clave para que no empuje al brand */
+    flex-wrap: nowrap;       /* evita saltos de línea */
+  }
+  .header .nav-link{
+    color:#8fd9ff !important; font-weight:600; white-space:nowrap;
+    text-shadow:0 1px 0 rgba(0,0,0,.25); transition:color .15s ease;
+  }
+  .header .nav-link:hover{ color:#e8f7ff !important; }
+  .header .nav-link.active,
+  .header .nav-link[aria-current="page"]{ color:#ffffff !important; }
+
+  /* CTA “Contacto”: deja espacio real antes de los iconos */
+  .header .nav-cta{
+    margin-right: clamp(20px, 3vw, 40px);
+    flex: 0 0 auto;
+  }
+
+  /* ACTIONS (derecha): nunca encima del CTA */
+  .header .header-actions{
+    grid-column: 3;
+    justify-self: end;
+    display: flex !important;
+    align-items: center;
+    gap: clamp(8px, 1.4vw, 14px);
+    margin-left: 0 !important;
+  }
+
+  /* Nada flotante: quita cualquier overlay/absoluto previo */
+  .header .btn,
+  .header .icon-btn{
+    position: static !important;
+    z-index: 0 !important;
+  }
+}
+
+/* Mobile / tablets chicas intacto */
+@media (max-width: 991.98px){
+  /* no cambiamos tu comportamiento móvil */
+}
+
+
+/* =========================================================
+   HOTFIX ÚNICO — Header desktop SIN solapamientos
+   (no toca mobile). Mantiene el degradé original.
+   Pegar AL FINAL del CSS.
+========================================================= */
+@media (min-width: 992px){
+
+  /* Fondo + altura (por si quedó pisado) */
+  .header{
+    background: linear-gradient(90deg,#1c1c1c 0%,#0077c8 100%) !important;
+    height: var(--header-h);
+    min-height: var(--header-h);
+    position: sticky; top: 0; z-index: 100;
+    -webkit-backdrop-filter: saturate(120%) blur(6px);
+    backdrop-filter: saturate(120%) blur(6px);
+  }
+
+  /* 3 columnas reales: [brand] | [nav centrado] | [actions] */
+  .header .container.header-row{
+    display: grid !important;
+    grid-template-columns: minmax(260px, auto) 1fr auto;
+    align-items: center;
+    gap: clamp(16px,2.4vw,28px);
+    width: 100%;
+    overflow: visible;
+  }
+
+  /* -------- BRAND (izquierda) -------- */
+  .header .brand{
+    justify-self: start;
+    display: inline-flex; align-items: center; gap: 10px;
+    min-width: 260px;           /* reserva fija para que no invada el nav */
+    max-width: 380px;           /* ajustable 360–420 si querés */
+    overflow: hidden;
+    margin: 0 !important;       /* neutraliza empujes previos */
+  }
+  .header .brand img{ height: 28px; width: auto; object-fit: contain; }
+  .header .brand .brand-text{
+    white-space: normal !important;   /* permite el <br> */
+    line-height: 1.08;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    color: #fff; font-weight: 700;
+  }
+  .header .brand .brand-text b{
+    display: block;
+    font-weight: 700;
+    color: #bfe8ff;                  /* “Transportes” clarito */
+  }
+
+  /* -------- NAV (centro) -------- */
+  .header .nav{
+    justify-self: center;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    min-width: 0;                    /* clave para que el grid no reviente */
+    padding-right: 0 !important;     /* quitamos empujes que lo desalinean */
+  }
+  .header .nav-link{
+    color: #8fd9ff !important;
+    font-weight: 600; white-space: nowrap;
+    text-shadow: 0 1px 0 rgba(0,0,0,.25);
+    transition: color .15s ease;
+  }
+  .header .nav-link:hover{ color:#e8f7ff !important; }
+  .header .nav-link.active,
+  .header .nav-link[aria-current="page"]{ color:#fff !important; }
+
+  /* CTA separado de los iconos (espacio REAL) */
+  .header .nav-cta{
+    margin-right: clamp(24px, 3vw, 44px) !important;
+    flex: 0 0 auto;
+  }
+
+  /* -------- ACTIONS (derecha) -------- */
+  .header .header-actions{
+    justify-self: end;
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    margin: 0 !important;            /* sin empujes hacia el nav */
+    position: relative; z-index: 1;   /* nunca encima del CTA */
+  }
+
+  /* Seguridad: nada “flotante” que vuelva a tapar el CTA */
+  .header .btn,
+  .header .icon-btn{
+    position: static !important;
+    inset: auto !important;
+    transform: none !important;
+  }
+}
+/* ===== HOTFIX Header sin solapes (Desktop & Móvil) ===== */
+
+/* Fondo y altura del header en todas las vistas */
+.header {
+  background: linear-gradient(90deg, #1c1c1c 0%, #0077c8 100%) !important;
+  height: var(--header-h, 72px);
+  min-height: var(--header-h, 72px);
+  position: sticky;
+  top: 0;
+  z-index: 100;  /* header se apila por encima del contenido */
+  border-bottom: 1px solid rgba(0,0,0,.15);
+  -webkit-backdrop-filter: saturate(120%) blur(6px);
+  backdrop-filter: saturate(120%) blur(6px);
+}
+
+/* ======= Desktop (>=992px) ======= */
+@media (min-width: 992px) {
+  /* Grid de 3 columnas: brand | nav | actions */
+  .header .container.header-row {
+    display: grid !important;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 22px;
+    width: 100%;
+  }
+  /* BRAND (logo y texto) con ancho reservado para evitar colisión con nav */
+  .header .brand {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 260px;  /* ajustar a 280-300px si el texto de marca es muy largo */
+    max-width: 380px;
+    overflow: hidden;   /* esconde overflow para que el texto no invada el nav */
+  }
+  .header .brand img {
+    height: 28px;
+    width: auto;
+    object-fit: contain;
+  }
+  .header .brand .brand-text {
+    display: inline-block;
+    line-height: 1.1;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    color: #fff;
+    font-weight: 700;
+    font-size: clamp(14px, 1.8vw, 16px);
+  }
+  .header .brand .brand-text b {
+    display: block;
+    color: #bfe8ff;
+    font-weight: 700;
+  }
+  /* NAV centrado y elementos en una sola línea sin wraps */
+  .header .nav {
+    justify-self: center;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    min-width: 0 !important;   /* permite que el nav se encoja si es necesario */
+    flex-wrap: nowrap !important;
+  }
+  .header .nav-link {
+    white-space: nowrap;
+    color: #8fd9ff !important;
+    font-weight: 600;
+    text-shadow: 0 1px 0 rgba(0,0,0,.25);
+    transition: color .15s ease;
+  }
+  .header .nav-link:hover {
+    color: #e8f7ff !important;
+  }
+  .header .nav-link.active,
+  .header .nav-link[aria-current="page"] {
+    color: #ffffff !important;
+  }
+  /* CTA “Contacto” o similar, con margen para separarlo de iconos de acciones */
+  .header .nav-cta {
+    margin-right: clamp(24px, 3vw, 42px) !important;
+    flex: 0 0 auto;
+  }
+  /* Acciones (botones/iconos) alineadas a la derecha */
+  .header .header-actions {
+    justify-self: end;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 12px;
+  }
+  .header .btn,
+  .header .icon-btn {
+    position: static !important;
+    z-index: 0 !important;  /* evita que botones tengan su propio stacking context por encima */
+  }
+}
+
+/* ======= Móvil (<992px) ======= */
+@media (max-width: 991.98px) {
+  /* Header en una fila: brand izquierda | acciones derecha */
+  .header .container.header-row {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding-inline: clamp(12px, 4vw, 20px);  /* espacio lateral responsivo */
+  }
+  /* BRAND ajustable en ancho, con texto en 2 líneas */
+  .header .brand {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .header .brand img {
+    height: 26px;
+    width: auto;
+    object-fit: contain;
+  }
+  .header .brand .brand-text {
+    display: inline-flex;
+    flex-direction: column;
+    white-space: normal;
+    line-height: 1.08;
+    font-weight: 700;
+    font-size: 14px;
+    color: #fff;
+  }
+  .header .brand .brand-text b {
+    font-size: 12.5px;
+    color: #bfe8ff;
+    font-weight: 600;
+  }
+  /* Nav y CTA ocultos en mobile (solo menú hamburguesa u iconos permanecen) */
+  .header .nav,
+  .header .nav-cta,
+  .header .header-actions .btn-cta {
+    display: none !important;
+  }
+  /* Acciones (iconos) a la derecha */
+  .header .header-actions {
+    flex: 0 0 auto;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 10px;
+    margin-left: 8px;
+  }
+  .header .icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    position: static !important;
+  }
+  /* Menú móvil desplegable ubicado debajo del header fijo */
+  .mobile-menu {
+    position: absolute !important;  /* o fixed, según implementación existente */
+    inset: var(--header-h, 72px) 0 auto 0 !important;
+    /* Con top = altura del header, el menú inicia bajo el header y evita solaparse */
+  }
+}
+
+/* ===== HOTFIX — Compactar nav en DESKTOP (tipos + espacios) ===== */
+@media (min-width: 992px){
+
+  /* Texto de los links más chico y sin saltos */
+  .header .nav-link{
+    font-size: clamp(13px, 1.00vw, 15px) !important; /* antes ~16px */
+    padding: .25rem 0 !important;
+    white-space: nowrap !important;
+    letter-spacing: .1px;
+  }
+
+  /* Menor separación entre items del menú */
+  .header .nav{
+    gap: clamp(10px, 1.2vw, 16px) !important;  /* antes 22px */
+    min-width: 0 !important;
+    flex-wrap: nowrap !important;
+  }
+
+  /* Botón “Contacto” más compacto */
+  .header .nav-cta{
+    font-size: clamp(13px, 1.05vw, 15px) !important;
+    padding: .55rem .95rem !important;        /* menos alto/ancho */
+    margin-right: clamp(12px, 1.6vw, 20px) !important; /* menos aire hacia los iconos */
+    line-height: 1.1;
+  }
+  .header .nav-cta i{ font-size: 1rem !important; }
+
+  /* Iconos de la derecha, un poco más juntos */
+  .header .header-actions{
+    gap: 10px !important;                     /* antes 12px */
+  }
+
+  /* Seguridad: nada flotante encima del CTA */
+  .header .btn,
+  .header .icon-btn{
+    position: static !important;
+    z-index: 0 !important;
+  }
 }

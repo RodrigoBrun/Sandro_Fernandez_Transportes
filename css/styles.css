@@ -476,21 +476,22 @@ body::after{
 
 /* Ejemplo de imágenes específicas */
 .preview-item:nth-child(1) {
-  background-image: url("../imagenes/gasolina_galeria.jpg"); /* La primera de arriba (lado izquierdo) */
+  background-image: url("../imagenes/ISO.png"); /* La primera de arriba (lado izquierdo) */
 }
 .preview-item:nth-child(2) {
-  background-image: url("../imagenes/mapa_galeria.jpg"); /* La grande del medio */
+  background-image: url("../imagenes/IQNET_Foto.png"); /* La grande del medio */
 }
 .preview-item:nth-child(3) {
-  background-image: url("../imagenes/neumaticos_galeria.jpg");  /* La de mas a la derecha */
+  background-image: url("../imagenes/extintor_galeria.jpg");  /* La de mas a la derecha */
   background-color: #0E7FB8;
 }
 .preview-item:nth-child(4) {
   background-image: url("../imagenes/extintor_galeria.jpg");   /* La primera de abajo (lado izquierdo) */
+  --zoom: 2.20;
 }
 /* Ajuste solo para el logo */
 .preview-item:nth-child(4) {
-  background-image: url("../imagenes/extintor_galeria.jpg");
+  background-image: url("../imagenes/gasolina_galeria.jpg");
   background-repeat: no-repeat; /* Evita que se repita */
   background-position: center;  /* Centra el logo */
   background-color: #f4f4f4; /* un gris claro más cercano al blanco del logo */
@@ -1635,3 +1636,55 @@ body.theme-light .footer{
     z-index: 0 !important;
   }
 }
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   PARCHE — Servicios (se quitó "Carga y descarga")
+   ✔ Desktop: 4 columnas en una sola fila (todas iguales)
+   ✔ Tablet: 2 columnas
+   ✔ Mobile: 1 columna
+   ✔ Elimina el comportamiento de estirar la última card
+========================================================= */
+
+/* Tablet en adelante: 2 columnas por defecto */
+@media (min-width: 768px){
+  #servicios .cards{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(260px,1fr)) !important;
+    gap: 22px;
+    margin-inline: auto;
+    align-items: stretch;
+  }
+
+  /* Quita cualquier span heredado en la última tarjeta */
+  #servicios .cards > .card:last-child{
+    grid-column: auto !important;
+  }
+}
+
+/* Desktop ancho: 4 columnas en una sola fila */
+@media (min-width: 1200px){
+  #servicios .cards{
+    grid-template-columns: repeat(4, minmax(240px, 1fr)) !important;
+    max-width: 1200px;   /* opcional: limita ancho para que no “flote” */
+  }
+}
+
+/* Mobile: 1 por fila */
+@media (max-width: 767.98px){
+  #servicios .cards{
+    grid-template-columns: 1fr !important;
+    gap: 18px;
+  }
+}
+
+
+

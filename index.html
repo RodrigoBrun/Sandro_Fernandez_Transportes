@@ -256,32 +256,74 @@
     </section>
 
 
-    <!-- ================================
-       Flota (usa sección "portfolio" del template)
-  ================================= -->
-    <section id="portfolio" class="section alt">
-        <div class="container">
-            <header class="section-head" data-aos="fade-up">
-                <span class="eyebrow">Nuestra flota</span>
-                <h2>Camiones e instalaciones</h2>
-                <p class="section-lead">Contamos con camiones modernos y un taller propio que aseguran puntualidad,
-                    seguridad y respaldo en cada viaje.</p>
-            </header>
+<!-- ================================
+     Flota (usa sección "portfolio")
+================================= -->
+<section id="portfolio" class="section alt">
+  <div class="container">
+    <header class="section-head" data-aos="fade-up">
+      <span class="eyebrow">Nuestra flota</span>
+      <h2>Camiones e instalaciones</h2>
+      <p class="section-lead">
+        Contamos con camiones modernos y un taller propio que aseguran puntualidad,
+        seguridad y respaldo en cada viaje.
+      </p>
+    </header>
 
-            <div class="grid" data-aos="fade-up">
-                <a class="tile camion1" href="#"><span class="tag"><i class="ph ph-truck"></i> Camión 1</span></a>
-                <a class="tile tall camion2" href="#"><span class="tag"><i class="ph ph-truck-trailer"></i> Camión
-                        2</span></a>
-                <a class="tile taller" href="#"><span class="tag"><i class="ph ph-warehouse"></i> Taller</span></a>
-                <a class="tile wide instalaciones" href="#"><span class="tag"><i class="ph ph-buildings"></i>
-                        Instalaciones</span></a>
-            </div>
-            <!--  <p style="text-align:center; margin-top:10px">
-                <a class="btn btn-cta" href="flota/galeria.html"><i class="ph ph-camera"></i> Ver galería completa</a>
-            </p> -->
+    <div class="grid" data-aos="fade-up">
+      <!-- Usa tantas URLs como quieras, separadas por coma -->
+      <a class="tile camion1"
+         href="#"
+         data-images="../imagenes/camion_blanco_galeria.jpg, ../imagenes/camion_blanco_galeria_2.jpg">
+        <span class="tag"><i class="ph ph-truck"></i> Camión 1</span>
+      </a>
 
-        </div>
-    </section>
+      <a class="tile tall camion2"
+         href="#"
+         data-images="../imagenes/camion_celeste_galeria.jpg, ../imagenes/scania_azul_desde_arriba.jpg, ../imagenes/scania_azul_enMovimiento.jpg">
+        <span class="tag"><i class="ph ph-truck-trailer"></i> Camión 2</span>
+      </a>
+
+      <a class="tile taller"
+         href="#"
+         data-images="../imagenes/neumaticos_galeria.jpg, ../imagenes/taller_galeria2.jpg, ../imagenes/taller_galeria.jpeg">
+        <span class="tag"><i class="ph ph-warehouse"></i> Taller</span>
+      </a>
+
+      <a class="tile wide instalaciones"
+         href="#"
+         data-images="../imagenes/instalaciones_galeria.jpg, ../imagenes/mension_especial.jpg, ../imagenes/Instalaciones_galeria2.jpg,  ../imagenes/Instalaciones_galeria3.jpg">
+        <span class="tag"><i class="ph ph-buildings"></i> Instalaciones</span>
+      </a>
+    </div>
+
+    <!--  <p style="text-align:center; margin-top:10px">
+          <a class="btn btn-cta" href="flota/galeria.html">
+            <i class="ph ph-camera"></i> Ver galería completa
+          </a>
+        </p> -->
+  </div>
+</section>
+
+<!-- ====== Lightbox (ponerlo antes del cierre de body) ====== -->
+<div id="lightbox" class="lb" aria-hidden="true" role="dialog" aria-label="Galería de imágenes">
+  <div class="lb__backdrop" data-close></div>
+
+  <figure class="lb__figure">
+    <img class="lb__img" alt="" />
+    <figcaption class="lb__caption"></figcaption>
+  </figure>
+
+  <button class="lb__btn lb__prev" aria-label="Imagen anterior"><i class="ph ph-caret-left"></i></button>
+  <button class="lb__btn lb__next" aria-label="Imagen siguiente"><i class="ph ph-caret-right"></i></button>
+  <button class="lb__btn lb__close" aria-label="Cerrar" data-close><i class="ph ph-x"></i></button>
+
+  <!-- Puntos -->
+  <div class="lb__dots" aria-hidden="true"></div>
+</div>
+
+
+
 
 
     <!-- ================================
@@ -436,141 +478,145 @@
         </div>
     </section>
 
-    <!-- ================================
+  <!-- ================================
      Contacto
 ================================= -->
-    <section id="contacto" class="section cta">
-        <div class="container cta-inner" data-aos="zoom-in">
-            <header>
-                <h2>Contacto</h2>
-                <p class="section-lead">Coordinación de viajes y consultas.</p>
-            </header>
+<section id="contacto" class="section cta">
+  <div class="container contacto-shell">
+    <!-- Card centrado y sin recortes -->
+    <div class="cta-inner" data-aos="zoom-in" style="overflow:visible; max-width:720px; margin-inline:auto;">
 
-            <!-- 
-      ⚙️ Este formulario funciona con:
-      - Botón WhatsApp (#btn-whatsapp) → abre chat con texto prearmado
-      - Botón Email     (#btn-email)    → abre cliente de correo (mailto)
-      - (Opcional) <a id="link-email">  → se actualiza solo mientras escribís
-      Campos soportados por el JS: nombre, motivo, mensaje, telefono, email
-    -->
-            <form class="form" id="contact-form" novalidate>
-                <!-- 🕵️ Honeypot anti-spam (oculto para humanos) -->
-                <input type="text" name="empresa" tabindex="-1" autocomplete="off"
-                    style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;" aria-hidden="true" />
+      <header>
+        <h2>Contacto</h2>
+        <p class="section-lead">Coordinación de viajes y consultas.</p>
+      </header>
 
-                <div class="form-row">
-                    <!-- Nombre -->
-                    <div class="field">
-                        <label for="c-nombre">Nombre</label>
-                        <input id="c-nombre" required type="text" name="nombre" placeholder="Tu nombre"
-                            autocomplete="name" aria-invalid="false" aria-describedby="err-nombre" />
-                        <div class="error-text" id="err-nombre" aria-live="polite"></div>
-                    </div>
+      <!-- 
+        ⚙️ Este formulario funciona con:
+        - Botón WhatsApp (#btn-whatsapp) → abre chat con texto prearmado
+        - Botón Email     (#btn-email)    → abre cliente de correo (mailto)
+        - (Opcional) <a id="link-email">  → se actualiza mientras escribís
+        Campos soportados por el JS: nombre, motivo, mensaje, telefono, email
+      -->
+      <form class="form" id="contact-form" novalidate>
+        <!-- 🕵️ Honeypot anti-spam -->
+        <input type="text" name="empresa" tabindex="-1" autocomplete="off"
+               style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;" aria-hidden="true" />
 
-                    <!-- Email -->
-                    <div class="field">
-                        <label for="c-email">Email</label>
-                        <input id="c-email" required type="email" name="email" placeholder="tu@mail.com"
-                            autocomplete="email" inputmode="email" aria-invalid="false" aria-describedby="err-email" />
-                        <div class="error-text" id="err-email" aria-live="polite"></div>
-                    </div>
-                </div>
+        <div class="form-row">
+          <!-- Nombre -->
+          <div class="field">
+            <label for="c-nombre">Nombre</label>
+            <input id="c-nombre" required type="text" name="nombre" placeholder="Tu nombre"
+                   autocomplete="name" aria-invalid="false" aria-describedby="err-nombre" />
+            <div class="error-text" id="err-nombre" aria-live="polite"></div>
+          </div>
 
-                <div class="form-row">
-                    <div class="form-row">
-                        <!-- Motivo -->
-                        <div class="field">
-                            <label for="c-motivo">Motivo</label>
-                            <select id="c-motivo" name="motivo" aria-invalid="false" aria-describedby="err-motivo">
-                                <option value="Presupuesto">Solicitud de presupuesto</option>
-                                <option value="Servicios">Consulta sobre servicios</option>
-                                <option value="Reserva">Agendar un servicio / reserva</option>
-                                <option value="Soporte">Soporte o reclamo</option>
-                                <option value="Trabajo">Trabajar con nosotros</option>
-                                <option value="Otro">Otro motivo</option>
-                            </select>
-                            <div class="error-text" id="err-motivo" aria-live="polite"></div>
-                        </div>
-                    </div>
-
-
-                    <!-- Teléfono -->
-                    <div class="field">
-                        <label for="c-telefono">Teléfono (opcional)</label>
-                        <input id="c-telefono" type="tel" name="telefono" inputmode="tel" placeholder="09x xxx xxx"
-                            pattern="^[0-9 +-]{6,20}$" autocomplete="tel" aria-invalid="false"
-                            aria-describedby="err-telefono" />
-                        <div class="error-text" id="err-telefono" aria-live="polite"></div>
-                    </div>
-                </div>
-
-                <!-- Mensaje -->
-                <div class="field">
-                    <label for="c-mensaje">Mensaje</label>
-                    <textarea id="c-mensaje" name="mensaje" rows="4" placeholder="Escribe tu mensaje..."
-                        aria-invalid="false" aria-describedby="err-mensaje"></textarea>
-                    <div class="error-text" id="err-mensaje" aria-live="polite"></div>
-                </div>
-
-                <div class="form-actions">
-                    <!-- Envío clásico del form (si luego conectás EmailJS/Sheets) -->
-                    <button class="btn btn-cta" type="submit">
-                        <i class="ph ph-paper-plane-right"></i> Enviar
-                    </button>
-
-                    <!-- WhatsApp con texto prearmado (lo arma el JS) -->
-                    <button class="btn btn-ghost" type="button" id="btn-whatsapp">
-                        <i class="ph ph-whatsapp-logo"></i> WhatsApp
-                    </button>
-
-                    <!-- Email (mailto) con asunto/cuerpo prearmados (lo arma el JS) -->
-                    <button class="btn" type="button" id="btn-email">
-                        <i class="ph ph-envelope-simple"></i> Email
-                    </button>
-
-                    <!-- (Opcional) enlace que se auto-actualiza con mailto -->
-                    <!-- <a id="link-email" class="link-muted" style="margin-left:8px;">Prefiero abrir el correo</a> -->
-                </div>
-
-                <!-- 📝 Microcopy legal breve (ajustá si querés) -->
-                <p class="form-hint" style="margin-top:8px; font-size:0.9rem; opacity:.8;">
-                    Al enviar aceptás ser contactado por nuestro equipo. No compartimos tus datos con terceros.
-                </p>
-            </form>
-
-            <!-- Datos de contacto rápidos (con enlaces) -->
-            <div class="contact-info" style="margin-top:16px">
-                <div class="contact-actions">
-                    <a class="action-pill phone" href="https://wa.me/59899840881" target="_blank" rel="noopener">
-                        <i class="ph ph-phone"></i><span>099 840 881</span>
-                    </a>
-                    <a class="action-pill email" href="mailto:sandrofernandez4@hotmail.com">
-                        <i class="ph ph-envelope-simple"></i><span>sandrofernandez4@hotmail.com</span>
-                    </a>
-                </div>
-
-
-                <!-- Dirección / horarios -->
-                <div class="hours">
-                    <div class="label"><i class="ph ph-map-pin"></i> Dirección:</div>
-                    <div class="value">Cno. El Tala s/n, Centenario, Durazno</div>
-
-                    <div class="label"><i class="ph ph-wrench"></i> Taller:</div>
-                    <div class="value nowrap">06:00 – 22:00</div>
-
-                    <div class="label"><i class="ph ph-headset"></i> Emergencias:</div>
-                    <div class="value nowrap">24 hs</div>
-                </div>
-            </div>
-
-            <!-- Mapa -->
-            <div style="margin-top:16px; border-radius:14px; overflow:hidden; width:100%;">
-                <iframe title="Mapa de contacto"
-                    src="https://maps.google.com/maps?q=-32.841530,-56.510994&z=12&output=embed" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade" style="width:100%; height:300px; border:0;"></iframe>
-            </div>
+          <!-- Email -->
+          <div class="field">
+            <label for="c-email">Email</label>
+            <input id="c-email" required type="email" name="email" placeholder="tu@mail.com"
+                   autocomplete="email" inputmode="email" aria-invalid="false" aria-describedby="err-email" />
+            <div class="error-text" id="err-email" aria-live="polite"></div>
+          </div>
         </div>
-    </section>
+
+        <div class="form-row">
+          <!-- Motivo -->
+          <div class="field">
+            <label for="c-motivo">Motivo</label>
+            <select id="c-motivo" name="motivo" aria-invalid="false" aria-describedby="err-motivo">
+              <option value="Presupuesto">Solicitud de presupuesto</option>
+              <option value="Servicios">Consulta sobre servicios</option>
+              <option value="Reserva">Agendar un servicio / reserva</option>
+              <option value="Soporte">Soporte o reclamo</option>
+              <option value="Trabajo">Trabajar con nosotros</option>
+              <option value="Otro">Otro motivo</option>
+            </select>
+            <div class="error-text" id="err-motivo" aria-live="polite"></div>
+          </div>
+
+          <!-- Teléfono -->
+          <div class="field">
+            <label for="c-telefono">Teléfono (opcional)</label>
+            <input id="c-telefono" type="tel" name="telefono" inputmode="tel" placeholder="09x xxx xxx"
+                   pattern="^[0-9 +-]{6,20}$" autocomplete="tel" aria-invalid="false" aria-describedby="err-telefono" />
+            <div class="error-text" id="err-telefono" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <!-- Mensaje -->
+        <div class="field">
+          <label for="c-mensaje">Mensaje</label>
+          <textarea id="c-mensaje" name="mensaje" rows="4" placeholder="Escribe tu mensaje..."
+                    aria-invalid="false" aria-describedby="err-mensaje"></textarea>
+          <div class="error-text" id="err-mensaje" aria-live="polite"></div>
+        </div>
+
+        <div class="form-actions">
+          <!-- Envío clásico del form (si luego conectás EmailJS/Sheets) -->
+          <button class="btn btn-cta" type="submit">
+            <i class="ph ph-paper-plane-right"></i> Enviar
+          </button>
+
+          <!-- WhatsApp con texto prearmado (lo arma el JS) -->
+          <button class="btn btn-ghost" type="button" id="btn-whatsapp">
+            <i class="ph ph-whatsapp-logo"></i> WhatsApp
+          </button>
+
+          <!-- Email (mailto) con asunto/cuerpo prearmados (lo arma el JS) -->
+          <button class="btn" type="button" id="btn-email">
+            <i class="ph ph-envelope-simple"></i> Email
+          </button>
+
+          <!-- (Opcional) enlace que se auto-actualiza con mailto -->
+          <!-- <a id="link-email" class="link-muted" style="margin-left:8px;">Prefiero abrir el correo</a> -->
+        </div>
+
+        <!-- 📝 Microcopy legal -->
+        <p class="form-hint" style="margin-top:8px; font-size:0.9rem; opacity:.8;">
+          Al enviar aceptás ser contactado por nuestro equipo. No compartimos tus datos con terceros.
+        </p>
+      </form>
+
+      <!-- Datos de contacto rápidos (con enlaces) -->
+      <div class="contact-info" style="margin-top:16px">
+        <div class="contact-actions">
+          <a class="action-pill phone" href="https://wa.me/59899840881" target="_blank" rel="noopener">
+            <i class="ph ph-phone"></i><span>099 840 881</span>
+          </a>
+          <a class="action-pill email" href="mailto:sandrofernandez4@hotmail.com">
+            <i class="ph ph-envelope-simple"></i><span>sandrofernandez4@hotmail.com</span>
+          </a>
+        </div>
+
+        <!-- Dirección / horarios -->
+        <div class="hours">
+          <div class="label"><i class="ph ph-map-pin"></i> Dirección:</div>
+          <div class="value">Cno. El Tala s/n, Centenario, Durazno</div>
+
+          <div class="label"><i class="ph ph-wrench"></i> Taller:</div>
+          <div class="value nowrap">06:00 – 22:00</div>
+
+          <div class="label"><i class="ph ph-headset"></i> Emergencias:</div>
+          <div class="value nowrap">24 hs</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mapa fuera del card (100% del container) -->
+    <div class="map-wrap" style="margin-top:16px; border-radius:14px; overflow:hidden; outline:1px solid var(--border);">
+      <iframe title="Mapa de contacto"
+              src="https://maps.google.com/maps?q=-32.841530,-56.510994&z=12&output=embed"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              style="display:block; width:100%; height:300px; border:0;"></iframe>
+    </div>
+  </div>
+</section>
+
+
+
+
 
 
 

@@ -730,7 +730,7 @@ body::after{
 
 /* 🚛 Camión 1 */
 .tile.camion1{
-  background-image: url("../imagenes/camion_blanco_galeria.jpg");
+  background-image: url("../imagenes/scania_azul_desde_arriba.jpg");
 
   /* 🎯 Encadre inicial recomendado (modificá a gusto) */
   --x: 500%;     /* mover a izquierda/derecha: 40%, 60%, etc. */
@@ -740,12 +740,12 @@ body::after{
 
 /* 🚛 Camión 2 */
 .tile.camion2{
-  background-image: url("../imagenes/camion_celeste_galeria.jpg");
+  background-image: url("../imagenes/flota_entera.jpg");
 
   /* El camión está a derecha → llevamos el encuadre hacia la derecha */
   --x: 62%;     /*60–70% para “correr” el foco a la derecha */
-  --y: 70%;     /* ajustá si corta techo/suelo */
-  --zoom: 1.05; /* un toque de zoom para evitar bordes vacíos */
+  --y: 45%;     /* ajustá si corta techo/suelo */
+  --zoom: 1.75; /* un toque de zoom para evitar bordes vacíos */
 }
 
 /* 🛠️ Taller */

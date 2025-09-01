@@ -276,7 +276,7 @@
                 <a class="tile wide instalaciones" href="#"><span class="tag"><i class="ph ph-buildings"></i>
                         Instalaciones</span></a>
             </div>
-          <!--  <p style="text-align:center; margin-top:10px">
+            <!--  <p style="text-align:center; margin-top:10px">
                 <a class="btn btn-cta" href="flota/galeria.html"><i class="ph ph-camera"></i> Ver galería completa</a>
             </p> -->
 
@@ -477,17 +477,22 @@
                 </div>
 
                 <div class="form-row">
-                    <!-- Motivo -->
-                    <div class="field">
-                        <label for="c-motivo">Motivo</label>
-                        <select id="c-motivo" name="motivo" aria-invalid="false" aria-describedby="err-motivo">
-                            <option value="Consulta">Consulta</option>
-                            <option value="Cotización">Cotización</option>
-                            <option value="Coordinación de viaje">Coordinación de viaje</option>
-                            <option value="Otro">Otro</option>
-                        </select>
-                        <div class="error-text" id="err-motivo" aria-live="polite"></div>
+                    <div class="form-row">
+                        <!-- Motivo -->
+                        <div class="field">
+                            <label for="c-motivo">Motivo</label>
+                            <select id="c-motivo" name="motivo" aria-invalid="false" aria-describedby="err-motivo">
+                                <option value="Presupuesto">Solicitud de presupuesto</option>
+                                <option value="Servicios">Consulta sobre servicios</option>
+                                <option value="Reserva">Agendar un servicio / reserva</option>
+                                <option value="Soporte">Soporte o reclamo</option>
+                                <option value="Trabajo">Trabajar con nosotros</option>
+                                <option value="Otro">Otro motivo</option>
+                            </select>
+                            <div class="error-text" id="err-motivo" aria-live="polite"></div>
+                        </div>
                     </div>
+
 
                     <!-- Teléfono -->
                     <div class="field">

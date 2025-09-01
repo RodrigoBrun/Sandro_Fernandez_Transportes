@@ -377,3 +377,157 @@ Fecha/Hora: ${d.meta.when}`;
     });
   })();
 });
+
+
+
+
+
+
+
+
+
+
+// ================================
+// Flota: Lightbox + slideshow (sin libs)
+// - Lee data-images de cada .tile
+// - Soporta múltiples imágenes, autoplay, teclado y swipe
+// - Ajustes mobile: aplica clase lb--mobile <640px
+// ================================
+(() => {
+  const tiles = document.querySelectorAll('#portfolio .tile');
+  if (!tiles.length) return;
+
+  const lb = document.getElementById('lightbox');
+  const img = lb.querySelector('.lb__img');
+  const caption = lb.querySelector('.lb__caption');
+  const dotsWrap = lb.querySelector('.lb__dots');
+  const btnPrev = lb.querySelector('.lb__prev');
+  const btnNext = lb.querySelector('.lb__next');
+  const closeEls = lb.querySelectorAll('[data-close]');
+
+  const REDUCE_MOTION = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+  const AUTOPLAY_MS = REDUCE_MOTION ? 0 : 4500;
+
+  let images = [];       // rutas actuales
+  let labels = [];       // etiquetas (opcionales)
+  let idx = 0;
+  let timer = null;
+  let lastTrigger = null; // para devolver foco al cerrar
+
+  // ---- Mobile helper: aplica clase cuando el viewport es angosto ----
+  const setMobileClass = () => {
+    lb.classList.toggle('lb--mobile', window.innerWidth < 640);
+  };
+  // pequeño debounce para resize
+  let rAF = null;
+  window.addEventListener('resize', () => {
+    if (rAF) cancelAnimationFrame(rAF);
+    rAF = requestAnimationFrame(setMobileClass);
+  });
+  setMobileClass();
+
+  const parseImages = (el) => {
+    const raw = (el.getAttribute('data-images') || '')
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean);
+    return raw;
+  };
+
+  const buildDots = () => {
+    dotsWrap.innerHTML = '';
+    if (images.length <= 1) return;
+    images.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', `Ir a imagen ${i+1}`);
+      b.addEventListener('click', () => go(i, /*manual*/true));
+      dotsWrap.appendChild(b);
+    });
+  };
+
+  const paint = () => {
+    img.src = images[idx];
+    caption.textContent = labels[idx] || '';
+    [...dotsWrap.children].forEach((d, i) =>
+      d.setAttribute('aria-current', String(i === idx))
+    );
+  };
+
+  const go = (i, manual=false) => {
+    idx = (i + images.length) % images.length;
+    paint();
+    if (manual) restartAutoplay();
+  };
+
+  const startAutoplay = () => {
+    stopAutoplay();
+    if (AUTOPLAY_MS > 0 && images.length > 1) {
+      timer = setInterval(() => go(idx + 1), AUTOPLAY_MS);
+    }
+  };
+  const stopAutoplay = () => { if (timer) { clearInterval(timer); timer = null; } };
+  const restartAutoplay = () => { stopAutoplay(); startAutoplay(); };
+
+  const open = (triggerEl, imgs, labelText='') => {
+    lastTrigger = triggerEl || null;
+    images = imgs;
+    labels = imgs.map(() => labelText);
+    idx = 0;
+    buildDots();
+    paint();
+    setMobileClass(); // ← asegura layout correcto al abrir
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    startAutoplay();
+  };
+
+  const close = () => {
+    stopAutoplay();
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    img.removeAttribute('src');
+    if (lastTrigger) lastTrigger.focus();
+  };
+
+  // Eventos básicos
+  btnPrev.addEventListener('click', () => go(idx - 1, true));
+  btnNext.addEventListener('click', () => go(idx + 1, true));
+  closeEls.forEach(el => el.addEventListener('click', close));
+  lb.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowRight') go(idx + 1, true);
+    if (e.key === 'ArrowLeft') go(idx - 1, true);
+  });
+
+  // Pausa autoplay al pasar el mouse
+  lb.addEventListener('mouseenter', stopAutoplay);
+  lb.addEventListener('mouseleave', startAutoplay);
+
+  // Swipe en mobile
+  let touchStartX = 0, touchEndX = 0;
+  lb.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, {passive:true});
+  lb.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const dx = touchEndX - touchStartX;
+    if (Math.abs(dx) > 40) { dx > 0 ? go(idx - 1, true) : go(idx + 1, true); }
+  }, {passive:true});
+
+  // Abrir desde cada tile
+  tiles.forEach(tile => {
+    tile.addEventListener('click', (e) => {
+      e.preventDefault();
+      const imgs = parseImages(tile);
+      if (!imgs.length) return;
+      const label = tile.querySelector('.tag')?.textContent?.trim() || '';
+      open(tile, imgs, label);
+
+      // focus-trap básico para accesibilidad
+      lb.setAttribute('tabindex', '-1');
+      lb.focus();
+    });
+  });
+})();
+

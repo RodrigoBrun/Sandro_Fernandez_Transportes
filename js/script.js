@@ -406,7 +406,9 @@ Fecha/Hora: ${d.meta.when}`;
   const closeEls = lb.querySelectorAll('[data-close]');
 
   const REDUCE_MOTION = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
-  const AUTOPLAY_MS = REDUCE_MOTION ? 0 : 4500;
+  const AUTOPLAY_MS = 0; // Para que no se pasen las fotos solas poner esto si si: const AUTOPLAY_MS = REDUCE_MOTION ? 0 : 4500;
+
+
 
   let images = [];       // rutas actuales
   let labels = [];       // etiquetas (opcionales)

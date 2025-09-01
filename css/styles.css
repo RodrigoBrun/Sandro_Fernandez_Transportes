@@ -1688,3 +1688,258 @@ body.theme-light .footer{
 
 
 
+/* ================================
+   CONTACT FORM — Polish & A11y (FIX)
+   Pegar AL FINAL de styles.css
+================================ */
+#contacto .form label{
+  font-weight:700;
+  color:var(--text);
+}
+
+/* Inputs + select unificados */
+#contacto .form input,
+#contacto .form textarea,
+#contacto .form select{
+  appearance:none;
+  -webkit-appearance:none;
+  width:100%;
+  padding:.9rem 1rem;
+  border-radius:12px;
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  color:var(--text);
+  transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+/* Placeholder con contraste correcto */
+#contacto .form ::placeholder{
+  color: color-mix(in oklab, var(--muted) 80%, transparent 20%);
+}
+
+/* Focus accesible */
+#contacto .form input:focus-visible,
+#contacto .form textarea:focus-visible,
+#contacto .form select:focus-visible{
+  outline:none;
+  border-color: color-mix(in oklab, var(--primary) 55%, var(--border) 45%);
+  box-shadow:0 0 0 3px color-mix(in oklab, var(--primary) 20%, transparent 80%);
+}
+
+/* Textarea altura cómoda */
+#contacto .form textarea{
+  min-height:140px;
+  resize:vertical;
+}
+
+/* Select con flecha custom (comentarios bien cerrados) */
+#contacto .form select{
+  padding-right:2.25rem;
+  /* El primer gradient es “dummy” para Safari */
+  background-image:
+    linear-gradient(180deg, #0000, #0000),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23a7b4c9' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right .7rem center;
+  background-size:18px 18px;
+}
+
+/* Autofill Chrome */
+#contacto .form input:-webkit-autofill,
+#contacto .form textarea:-webkit-autofill,
+#contacto .form select:-webkit-autofill{
+  -webkit-box-shadow:0 0 0 1000px var(--surface-2) inset !important;
+  -webkit-text-fill-color:var(--text) !important;
+  caret-color:var(--text);
+}
+
+/* Estados de error/ok (los maneja el JS con .is-invalid/.is-valid) */
+.form .field{ display:grid; gap:.35rem; }
+.form .error-text{
+  display:none;
+  color:#ffb4b4;
+  font-size:.85rem;
+  font-weight:600;
+}
+.form .is-invalid input,
+.form .is-invalid textarea,
+.form .is-invalid select{
+  border-color:#ff7a7a;
+  box-shadow:0 0 0 3px color-mix(in oklab, #ff7a7a 22%, transparent 78%);
+}
+.form .is-invalid .error-text{ display:block; }
+.form .is-valid input,
+.form .is-valid textarea,
+.form .is-valid select{
+  border-color: color-mix(in oklab, var(--primary) 55%, var(--border) 45%);
+}
+
+/* Botones: disabled */
+.form-actions .btn[disabled]{
+  opacity:.6; cursor:not-allowed; filter:grayscale(.15);
+}
+
+/* Respeta reduce-motion */
+@media (prefers-reduced-motion: reduce){
+  *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+}
+
+/* Fallback si el navegador no soporta color-mix */
+@supports not (color: color-mix(in oklab, white, black)){
+  #contacto .form input:focus-visible,
+  #contacto .form textarea:focus-visible,
+  #contacto .form select:focus-visible{
+    border-color: var(--primary);
+    box-shadow:0 0 0 3px rgba(25,131,187,.2);
+  }
+}
+
+
+
+/* ================================
+   Contact chips (phone / email)
+================================ */
+#contacto .contact-actions{
+  display:flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 6px;
+}
+
+#contacto .action-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  padding:.55rem .9rem;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: var(--shadow);
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+
+#contacto .action-pill i{
+  font-size: 1.05rem;
+  color: var(--primary);
+}
+
+/* Hover/focus accesibles */
+#contacto .action-pill:hover{
+  transform: translateY(-1px);
+  border-color: color-mix(in oklab, var(--primary) 55%, var(--border) 45%);
+}
+#contacto .action-pill:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 20%, transparent 80%);
+  border-color: color-mix(in oklab, var(--primary) 55%, var(--border) 45%);
+}
+
+/* Variantes (ligero matiz, sin “gritar”) */
+#contacto .action-pill.phone{
+  background: linear-gradient(180deg, #ffffff08, #ffffff03);
+}
+#contacto .action-pill.email{
+  background: linear-gradient(180deg, #ffffff08, #ffffff03);
+}
+
+/* Mobile: que no se rompa */
+@media (max-width:520px){
+  #contacto .action-pill{
+    flex: 1 1 auto;                 /* se estiran parejo si hay poco ancho */
+    justify-content: center;
+  }
+}
+
+
+#contacto .action-pill.phone{
+  background: var(--grad);
+  color: #fff;
+  border-color: transparent;
+}
+#contacto .action-pill.phone i{ color:#fff; }
+
+
+
+/* ================================
+   Footer — layout centrado + pills
+================================ */
+.footer{
+  padding: clamp(20px, 4vw, 36px) 0;
+  border-top: 1px solid var(--border);
+  background: linear-gradient(to top, color-mix(in oklab, var(--bg) 96%, #000 4%), transparent);
+}
+
+.footer .footer-row{
+  /* centrado y prolijo en todas las vistas */
+  display:flex !important;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+  gap: .5rem;
+  text-align:center;
+  min-height: 120px;
+}
+
+.footer .footer-row > div:first-child p{
+  margin: 0;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.footer .dev-signature{
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: .92rem;
+}
+
+.footer .dev-signature a{
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 700;
+}
+.footer .dev-signature a:hover{ text-decoration: underline; }
+
+/* Social pills */
+.footer .social{
+  display:flex;
+  gap: .5rem;
+  margin-top: .35rem;
+}
+.footer .social a{
+  width: 38px;
+  height: 38px;
+  display:grid; place-items:center;
+  border-radius: 999px;
+  background: #ffffff10;
+  border: 1px solid var(--border);
+  color: color-mix(in oklab, var(--text) 82%, transparent);
+  text-decoration: none;
+  transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease, color .15s ease;
+}
+.footer .social a:hover{
+  transform: translateY(-2px);
+  color: #fff;
+  border-color: color-mix(in oklab, var(--primary) 55%, var(--border) 45%);
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+}
+.footer .social i{ font-size: 1.05rem; }
+
+/* línea suave al centro (opcional, visual) */
+.footer::before{
+  content:"";
+  display:block;
+  width:min(680px, 86vw);
+  height:1px;
+  margin: 0 auto clamp(12px, 2vw, 18px);
+  background: linear-gradient(90deg, #0000, color-mix(in oklab, var(--border) 80%, transparent) 20%, color-mix(in oklab, var(--border) 80%, transparent) 80%, #0000);
+  opacity:.9;
+}
+
+/* Respeta reduce-motion */
+@media (prefers-reduced-motion: reduce){
+  .footer .social a{ transition:none !important; }
+}

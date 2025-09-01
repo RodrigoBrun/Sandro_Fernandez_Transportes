@@ -219,41 +219,41 @@
         </div>
     </section>
 
-  <!-- ================================
+    <!-- ================================
      Servicios
 ================================= -->
-<section id="servicios" class="section">
-    <div class="container">
-        <header class="section-head" data-aos="fade-up">
-            <span class="eyebrow">Qué hacemos</span>
-            <h2>Servicios</h2>
-            <p class="section-lead">Operativa forestal con foco en seguridad y puntualidad.</p>
-        </header>
+    <section id="servicios" class="section">
+        <div class="container">
+            <header class="section-head" data-aos="fade-up">
+                <span class="eyebrow">Qué hacemos</span>
+                <h2>Servicios</h2>
+                <p class="section-lead">Operativa forestal con foco en seguridad y puntualidad.</p>
+            </header>
 
-        <div class="cards">
-            <article class="card" data-aos="fade-up" data-aos-delay="0">
-                <i class="ph ph-truck"></i>
-                <h3>Transporte forestal integral</h3>
-                <p>Traslado de madera en equipos pesados por vía terrestre con procesos estandarizados.</p>
-            </article>
-            <article class="card" data-aos="fade-up" data-aos-delay="80">
-                <i class="ph ph-headset"></i>
-                <h3>Coordinación 24/7</h3>
-                <p>Disponibilidad permanente para programar viajes y responder ante imprevistos.</p>
-            </article>
-            <article class="card" data-aos="fade-up" data-aos-delay="160">
-                <i class="ph ph-shield-check"></i>
-                <h3>Seguridad vial</h3>
-                <p>Procedimientos alineados a la norma ISO 39001 y cultura preventiva en toda la operación.</p>
-            </article>
-            <article class="card" data-aos="fade-up" data-aos-delay="240">
-                <i class="ph ph-wrench"></i>
-                <h3>Taller propio</h3>
-                <p>Horario de <b>06:00 a 22:00</b> y servicio de <b>emergencia 24 hs</b> para la flota.</p>
-            </article>
+            <div class="cards">
+                <article class="card" data-aos="fade-up" data-aos-delay="0">
+                    <i class="ph ph-truck"></i>
+                    <h3>Transporte forestal integral</h3>
+                    <p>Traslado de madera en equipos pesados por vía terrestre con procesos estandarizados.</p>
+                </article>
+                <article class="card" data-aos="fade-up" data-aos-delay="80">
+                    <i class="ph ph-headset"></i>
+                    <h3>Coordinación 24/7</h3>
+                    <p>Disponibilidad permanente para programar viajes y responder ante imprevistos.</p>
+                </article>
+                <article class="card" data-aos="fade-up" data-aos-delay="160">
+                    <i class="ph ph-shield-check"></i>
+                    <h3>Seguridad vial</h3>
+                    <p>Procedimientos alineados a la norma ISO 39001 y cultura preventiva en toda la operación.</p>
+                </article>
+                <article class="card" data-aos="fade-up" data-aos-delay="240">
+                    <i class="ph ph-wrench"></i>
+                    <h3>Taller propio</h3>
+                    <p>Horario de <b>06:00 a 22:00</b> y servicio de <b>emergencia 24 hs</b> para la flota.</p>
+                </article>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
     <!-- ================================
@@ -276,6 +276,10 @@
                 <a class="tile wide instalaciones" href="#"><span class="tag"><i class="ph ph-buildings"></i>
                         Instalaciones</span></a>
             </div>
+          <!--  <p style="text-align:center; margin-top:10px">
+                <a class="btn btn-cta" href="flota/galeria.html"><i class="ph ph-camera"></i> Ver galería completa</a>
+            </p> -->
+
         </div>
     </section>
 
@@ -442,34 +446,110 @@
                 <p class="section-lead">Coordinación de viajes y consultas.</p>
             </header>
 
-            <form class="form" id="contact-form">
+            <!-- 
+      ⚙️ Este formulario funciona con:
+      - Botón WhatsApp (#btn-whatsapp) → abre chat con texto prearmado
+      - Botón Email     (#btn-email)    → abre cliente de correo (mailto)
+      - (Opcional) <a id="link-email">  → se actualiza solo mientras escribís
+      Campos soportados por el JS: nombre, motivo, mensaje, telefono, email
+    -->
+            <form class="form" id="contact-form" novalidate>
+                <!-- 🕵️ Honeypot anti-spam (oculto para humanos) -->
+                <input type="text" name="empresa" tabindex="-1" autocomplete="off"
+                    style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;" aria-hidden="true" />
+
                 <div class="form-row">
-                    <label>Nombre
-                        <input required type="text" name="nombre" placeholder="Tu nombre" />
-                    </label>
-                    <label>Email
-                        <input required type="email" name="email" placeholder="tu@mail.com" />
-                    </label>
+                    <!-- Nombre -->
+                    <div class="field">
+                        <label for="c-nombre">Nombre</label>
+                        <input id="c-nombre" required type="text" name="nombre" placeholder="Tu nombre"
+                            autocomplete="name" aria-invalid="false" aria-describedby="err-nombre" />
+                        <div class="error-text" id="err-nombre" aria-live="polite"></div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="field">
+                        <label for="c-email">Email</label>
+                        <input id="c-email" required type="email" name="email" placeholder="tu@mail.com"
+                            autocomplete="email" inputmode="email" aria-invalid="false" aria-describedby="err-email" />
+                        <div class="error-text" id="err-email" aria-live="polite"></div>
+                    </div>
                 </div>
-                <label>Mensaje
-                    <textarea name="mensaje" rows="4" placeholder="Escribe tu mensaje..."></textarea>
-                </label>
+
+                <div class="form-row">
+                    <!-- Motivo -->
+                    <div class="field">
+                        <label for="c-motivo">Motivo</label>
+                        <select id="c-motivo" name="motivo" aria-invalid="false" aria-describedby="err-motivo">
+                            <option value="Consulta">Consulta</option>
+                            <option value="Cotización">Cotización</option>
+                            <option value="Coordinación de viaje">Coordinación de viaje</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                        <div class="error-text" id="err-motivo" aria-live="polite"></div>
+                    </div>
+
+                    <!-- Teléfono -->
+                    <div class="field">
+                        <label for="c-telefono">Teléfono (opcional)</label>
+                        <input id="c-telefono" type="tel" name="telefono" inputmode="tel" placeholder="09x xxx xxx"
+                            pattern="^[0-9 +-]{6,20}$" autocomplete="tel" aria-invalid="false"
+                            aria-describedby="err-telefono" />
+                        <div class="error-text" id="err-telefono" aria-live="polite"></div>
+                    </div>
+                </div>
+
+                <!-- Mensaje -->
+                <div class="field">
+                    <label for="c-mensaje">Mensaje</label>
+                    <textarea id="c-mensaje" name="mensaje" rows="4" placeholder="Escribe tu mensaje..."
+                        aria-invalid="false" aria-describedby="err-mensaje"></textarea>
+                    <div class="error-text" id="err-mensaje" aria-live="polite"></div>
+                </div>
+
                 <div class="form-actions">
+                    <!-- Envío clásico del form (si luego conectás EmailJS/Sheets) -->
                     <button class="btn btn-cta" type="submit">
                         <i class="ph ph-paper-plane-right"></i> Enviar
                     </button>
-                    <!-- Si preferís quitar WhatsApp en toda la web, comentá este botón -->
+
+                    <!-- WhatsApp con texto prearmado (lo arma el JS) -->
                     <button class="btn btn-ghost" type="button" id="btn-whatsapp">
                         <i class="ph ph-whatsapp-logo"></i> WhatsApp
                     </button>
+
+                    <!-- Email (mailto) con asunto/cuerpo prearmados (lo arma el JS) -->
+                    <button class="btn" type="button" id="btn-email">
+                        <i class="ph ph-envelope-simple"></i> Email
+                    </button>
+
+                    <!-- (Opcional) enlace que se auto-actualiza con mailto -->
+                    <!-- <a id="link-email" class="link-muted" style="margin-left:8px;">Prefiero abrir el correo</a> -->
                 </div>
+
+                <!-- 📝 Microcopy legal breve (ajustá si querés) -->
+                <p class="form-hint" style="margin-top:8px; font-size:0.9rem; opacity:.8;">
+                    Al enviar aceptás ser contactado por nuestro equipo. No compartimos tus datos con terceros.
+                </p>
             </form>
 
-            <!-- Dirección / horarios -->
+            <!-- Datos de contacto rápidos (con enlaces) -->
             <div class="contact-info" style="margin-top:16px">
-                <p><i class="ph ph-map-pin"></i> Cno. El Tala s/n, Centenario, Durazno</p>
+                <div class="contact-actions">
+                    <a class="action-pill phone" href="https://wa.me/59899840881" target="_blank" rel="noopener">
+                        <i class="ph ph-phone"></i><span>099 840 881</span>
+                    </a>
+                    <a class="action-pill email" href="mailto:sandrofernandez4@hotmail.com">
+                        <i class="ph ph-envelope-simple"></i><span>sandrofernandez4@hotmail.com</span>
+                    </a>
+                </div>
 
+
+                <!-- Dirección / horarios -->
                 <div class="hours">
+                    <div class="label"><i class="ph ph-map-pin"></i> Dirección:</div>
+                    <div class="value">Cno. El Tala s/n, Centenario, Durazno</div>
+
                     <div class="label"><i class="ph ph-wrench"></i> Taller:</div>
                     <div class="value nowrap">06:00 – 22:00</div>
 
@@ -486,6 +566,7 @@
             </div>
         </div>
     </section>
+
 
 
     <!-- ================================

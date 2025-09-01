@@ -482,20 +482,20 @@ body::after{
   background-image: url("../imagenes/IQNET_Foto.png"); /* La grande del medio */
 }
 .preview-item:nth-child(3) {
-  background-image: url("../imagenes/extintor_galeria.jpg");  /* La de mas a la derecha */
+  background-image: url("../imagenes/mension_especial.jpg");  /* La de mas a la derecha */
   background-color: #0E7FB8;
 }
 .preview-item:nth-child(4) {
-  background-image: url("../imagenes/extintor_galeria.jpg");   /* La primera de abajo (lado izquierdo) */
+  background-image: url("../imagenes/funcionarios1.jpg");   /* La primera de abajo (lado izquierdo) */
   --zoom: 2.20;
 }
 /* Ajuste solo para el logo */
 .preview-item:nth-child(4) {
-  background-image: url("../imagenes/gasolina_galeria.jpg");
+  background-image: url("../imagenes/funcionarios1.jpg");
   background-repeat: no-repeat; /* Evita que se repita */
   background-position: center;  /* Centra el logo */
   background-color: #f4f4f4; /* un gris claro más cercano al blanco del logo */
-  --zoom: 2.20;
+  --zoom: 3.20;
 }
 
 
@@ -750,7 +750,7 @@ body::after{
 
 /* 🛠️ Taller */
 .tile.taller{
-  background-image: url("../imagenes/taller_galeria.jpeg");
+  background-image: url("../imagenes/neumaticos_galeria.jpg");
 
   /* Suelen cortar cielo/suelo: centramos apenas bajo la mitad */
   --x: 50%;
@@ -1943,3 +1943,294 @@ body.theme-light .footer{
 @media (prefers-reduced-motion: reduce){
   .footer .social a{ transition:none !important; }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============ Lightbox (galería modal) ============ */
+.lb{
+  position: fixed; inset: 0; z-index: 9999;
+  display: grid; place-items: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s ease;
+}
+.lb[aria-hidden="false"]{ opacity: 1; pointer-events: auto; }
+
+.lb__backdrop{
+  position: absolute; inset: 0;
+  background: color-mix(in oklab, #000 80%, transparent);
+  backdrop-filter: blur(2px);
+}
+
+.lb__figure{
+  position: relative; z-index: 1;
+  max-width: min(1100px, 92vw);
+  max-height: min(82vh, 92vh);
+  display: grid; grid-template-rows: 1fr auto;
+  gap: .6rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: clamp(8px, 1.6vw, 14px);
+}
+
+.lb__img{
+  width: 100%; height: 100%;
+  object-fit: contain; border-radius: 10px;
+  background: #000;  /* marco negro “fotográfico” */
+}
+
+.lb__caption{
+  color: var(--muted);
+  font-weight: 600; text-align: center;
+  min-height: 1.2em;
+}
+
+.lb__btn{
+  position: absolute; z-index: 2;
+  width: 44px; height: 44px;
+  border-radius: 999px;
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+  background: #ffffff10; color: var(--text);
+  box-shadow: var(--shadow);
+  transition: transform .15s ease, background .15s ease;
+}
+.lb__btn:hover{ transform: translateY(-1px); background:#ffffff18; }
+.lb__close{ top: 14px; right: 14px; }
+.lb__prev{ left: 18px; top: 50%; transform: translateY(-50%); }
+.lb__next{ right: 18px; top: 50%; transform: translateY(-50%); }
+
+.lb__dots{
+  position: absolute; bottom: clamp(12px, 3vw, 18px); left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 8px; z-index: 2;
+}
+.lb__dots button{
+  width: 8px; height: 8px; border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #ffffff30;
+}
+.lb__dots button[aria-current="true"]{ background: var(--primary); border-color: var(--primary); }
+
+/* Mobile: botones un toque más grandes */
+@media (max-width: 520px){
+  .lb__btn{ width: 48px; height: 48px; }
+}
+
+/* ==== Lightbox: evitar desbordes en fotos muy altas/anchas ==== */
+.lb__figure{
+  /* ya lo tenías, pero reforzamos: */
+  width: min(1100px, 92vw);
+  max-height: min(86vh, 92vh);
+
+  /* CLAVES: permitir que el hijo se encoja y recortar bordes redondeados */
+  grid-template-rows: minmax(0, 1fr) auto; /* la fila de la imagen puede encogerse */
+  overflow: hidden;                         /* respeta el borde redondeado */
+}
+
+.lb__img{
+  display: block;
+
+  /* La imagen llena la PRIMERA fila del grid y se “contiene” */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  /* ni recorta ni deforma */
+
+  /* por si algún estilo previo la forzaba */
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10px;
+}
+
+
+
+/* ===== Lightbox — Mobile polish ===== */
+@media (max-width: 640px){
+  /* contenedor más compacto y con unidades seguras de viewport */
+  .lb__figure{
+    width: 96vw;                 /* casi a borde */
+    max-width: 96vw;
+    max-height: 74svh;           /* respeta barra/teclado en móviles */
+    padding: 10px;               /* menos padding */
+    border-radius: 14px;
+  }
+  .lb__img{
+    border-radius: 10px;
+    /* por si la foto es muy panorámica */
+    max-height: calc(74svh - 42px); /* deja lugar al caption */
+  }
+
+  /* botones un toque más grandes y pegados al marco del figure */
+  .lb__btn{
+    width: 48px; height: 48px;
+    backdrop-filter: blur(2px);
+  }
+  .lb__prev{ left: 10px; }
+  .lb__next{ right: 10px; }
+  /* botón cerrar respeta notch/safe-area */
+  .lb__close{
+    top: max(10px, env(safe-area-inset-top, 10px));
+    right: max(10px, env(safe-area-inset-right, 10px));
+  }
+
+  /* caption más legible y sin ocupar de más */
+  .lb__caption{
+    font-size: .95rem;
+    padding: 2px 4px 0;
+    min-height: 1.1em;
+  }
+
+  /* puntos centrados y sin irse muy abajo */
+  .lb__dots{
+    bottom: max(10px, env(safe-area-inset-bottom, 10px));
+    gap: 6px;
+  }
+  .lb__dots button{ width: 7px; height: 7px; }
+}
+
+/* opcional: en móviles MUY chicos, aún más compacto */
+@media (max-width: 360px){
+  .lb__figure{ max-height: 70svh; }
+  .lb__img{ max-height: calc(70svh - 40px); }
+}
+
+
+
+/* ===== Lightbox — centrar en mobile ===== */
+@media (max-width: 640px){
+  .lb{
+    display: flex;              /* cambiamos grid → flex */
+    align-items: center;        /* centra vertical */
+    justify-content: center;    /* centra horizontal */
+    padding: 20px;              /* respiro contra bordes */
+  }
+
+  .lb__figure{
+    margin: 0 auto;             /* asegura centrado */
+    max-height: 80svh;          /* ajusta al alto visible */
+  }
+
+  .lb__img{
+    max-height: calc(80svh - 40px); /* deja espacio a caption y botones */
+  }
+}
+
+
+
+
+
+
+/* Centrado perfecto de la tarjeta de contacto en móvil */
+#contacto .contacto__container{
+  display:flex;               /* centra el bloque interno */
+  justify-content:center;
+  padding-inline: 18px;       /* margen simétrico seguro */
+}
+
+#contacto .cta-inner{
+  width: min(720px, 100%);    /* límite agradable de ancho */
+  margin-inline: auto;        /* centra sí o sí */
+  box-sizing: border-box;
+}
+
+/* Respeta notch/safe-areas (iPhone, etc.) */
+@supports (padding: max(0px)){
+  @media (max-width: 640px){
+    #contacto .contacto__container{
+      padding-left:  max(18px, env(safe-area-inset-left));
+      padding-right: max(18px, env(safe-area-inset-right));
+    }
+  }
+}
+
+
+
+
+/* Contacto — sin cortes a la derecha en móvil */
+#contacto .contacto-shell{
+  /* padding simétrico seguro y centrado del card */
+  padding-inline: 18px;
+  margin-inline: auto;
+  max-width: var(--container);
+}
+
+#contacto .cta-inner{
+  /* límite real: nunca más ancho que el viewport menos el padding lateral */
+  width: 100%;
+  max-width: min(720px, calc(100svw - 36px)); /* 18px x 2 */
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+/* Si alguna animación usa transform, evitamos “recortes” visuales */
+#contacto { overflow: visible; }
+
+/* Por si algún browser viejo no soporta svw */
+@supports not (width: 1svw){
+  #contacto .cta-inner{
+    max-width: min(720px, calc(100vw - 36px));
+  }
+}
+
+
+/* === CONTACTO — FIX de recorte a la derecha ================== */
+#contacto .cta-inner{
+  /* no recortar los hijos (botones/pills) */
+  overflow: visible !important;
+
+  /* asegurar que SIEMPRE entra en el viewport */
+  max-width: min(720px, calc(100dvw - 36px)) !important; /* 18px x lado */
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+/* Si AOS aplica un scale durante la animación, evitá clipping */
+#contacto .cta-inner[data-aos]{
+  transform-origin: center center;
+}
+
+/* Los botones y pills no deben desbordar */
+#contacto .form-actions .btn,
+#contacto .action-pill{ max-width: 100%; }
+
+/* Por si algún navegador no soporta dvw */
+@supports not (width: 1dvw){
+  #contacto .cta-inner{ max-width: min(720px, calc(100vw - 36px)) !important; }
+}
+
+
+/* FIX Contacto: que la dirección pueda partirse en mobile */
+#contacto .hours{
+  grid-template-columns: auto minmax(0,1fr);  /* permite que la 2ª columna encoja */
+}
+
+#contacto .hours .value{
+  font-weight:700;
+  white-space: normal !important;   /* ← deja que envuelva */
+  overflow-wrap: anywhere;          /* rompe si hace falta */
+  min-width: 0;                     /* evita desbordes en grid */
+}
+
+/* En desktop mantené 2 pares de columnas, pero con minmax */
+@media (min-width:980px){
+  #contacto .hours{
+    grid-template-columns: auto minmax(0,1fr) auto minmax(0,1fr);
+  }
+}
+
+/* Solo los que marcaste como “nowrap” deben no partirse */
+#contacto .hours .value.nowrap{ white-space: nowrap !important; }
